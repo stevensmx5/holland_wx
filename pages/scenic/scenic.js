@@ -7,14 +7,7 @@ Page({
     loading: false,
     plain: false,
     buplic_url: app.url_test,
-    recommend_scenic:[
-      ['../../images/menu_img1.jpg', '../../images/menu_icon1.png', '导览'],
-      ['../../images/menu_img2.jpg', '../../images/menu_icon2.png', '待定'],
-      ['../../images/menu_img3.jpg', '../../images/menu_icon3.png', '待定'],
-      ['../../images/menu_img2.jpg', '../../images/menu_icon2.png', '待定'],
-      ['../../images/menu_img3.jpg', '../../images/menu_icon3.png', '待定'],
-      ['../../images/menu_img1.jpg', '../../images/menu_icon1.png', '待定']
-    ]
+    buplic_url: app.url_test
   },
   guidance:function(){
     wx.navigateTo({
@@ -31,23 +24,7 @@ Page({
     })
   },
   onLoad: function () {
-    var that = this
-    wx.request({
-      url: app.url_test + 'sub/webservice/pageinfo.php',
-      data: {
-        Vcl_FunName: 'GetHomepagePicture',
-      },
-      method: "POST",
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        that.setData({
-          img_data: res.data,
-
-        })
-      }
-    })
+    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -76,6 +53,7 @@ Page({
     }
   },
   onShow:function(){
+    var that = this
     wx.setTabBarItem({
       index: 1,
       text: '荷兰国立博物馆'
@@ -83,9 +61,49 @@ Page({
     wx.getStorage({
       key: 'page_id',
       success: function(res) {
-        console.log(res.data)
+        // console.log(res.data)
+
+        
+        wx.request({
+          url: app.url_test + 'sub/webservice/pageinfo.php',
+          data: {
+            Vcl_FunName: 'GetAccountBaseInfo',
+            Vcl_Id: res.data,
+            Vcl_OpenId:'1234567890'
+          },
+          method: "POST",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            var name = decodeURIComponent(res.data.Name)
+            var enname = decodeURIComponent(res.data.EnName)
+            var bg_img = res.data.BackgroundImage
+            var type = decodeURIComponent(res.data.Type)
+            var sub_program = res.data.SubProgram
+            for (var i = 0; i < sub_program.length; i++) {
+              var data = sub_program[i].Name;
+              sub_program[i].Name = decodeURIComponent(data)  
+            } 
+
+            that.setData({
+              ChName: name,
+              EnName: enname,
+              BackgroundImage: app.url_test + bg_img,
+              Type: type,
+              SubProgram: sub_program
+            })
+            // console.log(res.data)
+            // console.log(enname)
+            // console.log(bg_img)
+            // console.log(type)
+            // console.log(sub_program)
+            // console.log(JSON.parse(program))
+          }
+        })
       },
     })
+    
   },
   getUserInfo: function (e) {
     console.log(e)

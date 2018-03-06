@@ -8,21 +8,10 @@ Page({
     plain: false,
     buplic_url: app.url_test
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   //https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/
   search:function(){
     wx.navigateTo({
       url: '../searchlist/searchlist'
-    })
-  },
-  bind_test:function(){
-    wx.navigateTo({
-      url:'../demo/demo'
     })
   },
   // onReady:function(){
@@ -37,18 +26,15 @@ Page({
       Hei: swiperH　　　　　　　　//设置高度
     })
   },
-  scenic_page:function(e){
-    var id=e.target.id
-
-    wx.setStorage({
-      key: 'page_id',
-      data: id,
-    })
-    //console.log(id)
-
-    // wx.navigateTo({
-    //   url: '../scenic/scenic?'+id,
+  scenic_page:function(){
+    // var id=e.target.id
+    // wx.setStorage({
+    //   key: 'page_id',
+    //   data: id
     // })
+    wx.switchTab({
+      url: '../scenic/scenic'
+    })
   },
   onLoad: function () {
     var that = this
@@ -74,7 +60,7 @@ Page({
 
         })
 
-        console.log(img_data)
+        // console.log(img_data)
       }
     })
     if (app.globalData.userInfo) {

@@ -1,13 +1,13 @@
 <view class='container'>
   <view class='page_bg'>
-    <image src='../../images/scenic_bg.jpg' mode="widthFix"></image>
+    <image src='{{BackgroundImage}}' mode="widthFix"></image>
   </view>
   <view class='scenic_content'>
     <view class='scenic_type_box'>
-      <view class='scenic_type'>展 馆</view>
+      <view class='scenic_type'>{{Type}}</view>
       <image src='../../images/star.png'></image>
-      <view class='name_ch'>荷兰国立博物馆</view>
-      <view class='name_en'>Rijksmuseum</view>
+      <view class='name_ch'>{{ChName}}</view>
+      <view class='name_en'>{{EnName}}</view>
     </view>
     <view class='quick_toolbar_box'>
       <view class='quick_toolbar'>
@@ -21,13 +21,13 @@
       </view>
     </view>
     <scroll-view scroll-x='true' class='recommend_scenic_box'>
-      <block wx:for="{{recommend_scenic}}">
+      <block wx:for="{{SubProgram}}">
         <view class='recommend_scenic'>
-          <view class='recommend_scenic_img' bindtap='guidance'>
-            <image class='recommend_scenic_bg' mode='widthFix' src='{{item[0]}}'></image>
-            <image class='recommend_scenic_icon' src='{{item[1]}}'></image>
+          <view class='recommend_scenic_img' bindtap='guidance' id='{{item.Id}}'>
+            <image class='recommend_scenic_bg' mode='widthFix' src='{{buplic_url}}{{item.LogoImage}}'></image>
+            <image class='recommend_scenic_icon' src='{{buplic_url}}{{item.LogoIcon}}'></image>
           </view>
-          <view class='recommend_scenic_text'>{{item[2]}}</view>
+          <view class='recommend_scenic_text'>{{item.Name}}</view>
         </view>
       </block>
     </scroll-view>

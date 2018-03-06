@@ -5,10 +5,24 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
     // 登录
     wx.login({
       success: res => {
+        wx.request({
+          url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/sub/webservice/pageinfo.php',
+          data:{
+            Vcl_FunName: 'GetUserOpenId',
+            Vcl_JsCode: res.code
+          },
+          method: "POST",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success:function(e){
+            // console.log(e.data.OpenId)
+          }
+        })
+        // console.log(res)
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
@@ -36,5 +50,5 @@ App({
   globalData: {
     userInfo: null
   },
-  url_test:'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/'
+  url_test: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/'
 })
