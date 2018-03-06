@@ -1,0 +1,35 @@
+<view class='container'>
+  <view class='userinfo'>
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='login_btn'> 获取头像昵</button>
+    <block>
+      <view class='username'>{{userInfo.nickName}}</view>
+      <image class='useravatar' src='{{userInfo.avatarUrl}}'></image>
+    </block>
+  </view>
+  <view class='userinfo_content'>
+    <view class='userinfo_text'>
+      <view>姓名</view>
+      <view>Stella Summers</view>
+    </view>
+    <view class='userinfo_text'>
+      <view>城市</view>
+      <view>beijing</view>
+    </view>
+    <view class='userinfo_text'>
+      <view>邮箱</view>
+      <view>Summer@qq.com</view>
+    </view>
+  </view>
+  <view class='my_record_box'>
+    <view class="record_type {{check==0?'active':''}}" bindtap='recordtype'>我的收藏</view>
+    <view class="record_type {{check==1?'active':''}}" bindtap='recordtype'>浏览记录</view>
+    <view class="bottom_line {{check==0?'left':'right'}}"></view>
+  </view>
+  <scroll-view scroll-x='true' class='record_list'>
+    <block wx:for='{{record_ulr}}'>
+      <view class='record_list_img'>
+        <image src='{{item}}' mode='widthFix'></image>
+      </view>
+    </block>
+  </scroll-view>
+</view>

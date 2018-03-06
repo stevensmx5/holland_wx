@@ -1,0 +1,44 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/scenic/scenic",
+    "pages/user/user",
+    "pages/searchlist/searchlist",
+    "pages/guidance/guidance",
+    "pages/guidancecompanion/guidancecompanion"
+    
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath":"images/home.png",
+        "selectedIconPath":"images/home_checked.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/scenic/scenic",
+        "iconPath": "images/scenic.png",
+        "selectedIconPath": "images/scenic_checked.png",
+        "text": "景点"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user_checked.png",
+        "text": "我的"
+      }
+    ],
+    "color":"#6b6b6b",
+    "selectedColor":"#fff",
+    "backgroundColor":"#080808",
+    "borderStyle":"white"
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#222428",
+    "navigationBarTextStyle": "#fff",
+    "navigationBarTitleText": "荷兰旅游",
+    "backgroundColor": "#111113",
+    "backgroundTextStyle": "light"
+  }
+}

@@ -1,0 +1,16 @@
+<view class='container'>
+  <view class='companion_text'>
+    <view class='topline'></view>
+    <text>欢迎进入荷兰国立博物馆，从这里，开启您的荷兰
+      国立博物馆之行吧！输入展品编号，
+      即可获得相应的介绍。</text>
+    <view class='bottomline'></view>
+  </view>
+  <view class='video_box'>
+    <image class='companion_img' mode='widthFix' src='../../images/companion.jpg'></image>
+    <text>导览使用指南</text>
+  </view>
+  <view class='bottom_input'>
+    <input focus='true' type="text" confirm-type='search' placeholder='输入导览编号' placeholder-style='color:#ced3da'></input>
+  </view>
+</view>

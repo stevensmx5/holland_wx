@@ -1,0 +1,15 @@
+  <view class='top_bar' bindtap='clickbar'>
+    <text class="{{topbar == 0 ? 'text':'text_open'}}">+</text>
+  </view>
+  <view class="{{topbar == 0 ? 'top_bar_2td':'top_bar_2td_open'}}">
+    <view class="{{topbar == 0 ? 'topbar_btn1':'topbar_btn1_open'}}">
+      <image src='../../images/home.png'></image>
+    </view>
+    <view class="{{topbar == 0 ? 'topbar_btn2':'topbar_btn2_open'}}">
+      <image src='../../images/user.png'></image>
+    </view>
+    <view class="{{topbar == 0 ? 'topbar_btn3':'topbar_btn3_open'}}">
+      <image src='../../images/home.png'></image>
+    </view>
+    <slot></slot>
+  </view>

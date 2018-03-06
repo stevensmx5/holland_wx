@@ -1,0 +1,72 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='location_logo'>
+    <view class='location_box'>
+      <image class='location_icon' src='../../images/location.png'></image>
+      <text class='location_text'>location</text>
+    </view>
+    <view class='logo_box'>
+      <image class='logo_icon' src='../../images/holland_logo.png' mode='widthFix'></image>
+    </view>
+  </view>
+  <view class='search_box'>
+    <view class='search_div'>
+      <image class='search_icon' src='../../images/search_icon.png' bindtap='search'></image>
+      <input placeholder='搜索'></input>
+    </view>
+  </view>
+  <view class='recommend_text'>
+    为您推荐
+  </view>
+      
+
+  <view class='top_img_box'>
+    <swiper class='img_box' indicator-dots='true' autoplay='true' interval='3000' circular='true' previous-margin='80px' next-margin='80px' style='height:{{Hei}}'>
+      <block wx:for="{{img_data}}" >
+        <swiper-item>
+          <view class='top_img'>
+            <image id='{{item[0]}}' bindtap='img_test' src='{{buplic_url}}{{item[1]}}'mode="widthFix" bindload='imgH'bindtap='scenic_page'></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  
+
+  <view class='partner_text'>合作伙伴</view>
+  <view class='partner_box'>
+    <view class='partner_div'>
+      <button class='partner_btn'>其他小程序</button>
+    </view>
+    <view class='partner_div'>
+      <button class='partner_btn'>其他小程序</button>
+    </view>
+    <view class='partner_div'>
+      <button class='partner_btn'>其他小程序</button>
+    </view>
+    <view class='partner_div'>
+      <button class='partner_btn'>其他小程序</button>
+    </view>
+    <view class='partner_div'>
+      <button class='partner_btn'>其他小程序</button>
+    </view>
+    <view class='partner_div'>
+      <button class='partner_btn'>其他小程序</button>
+    </view>
+    <view class='partner_div'>
+      <button class='partner_btn'>其他小程序</button>
+    </view>
+    <view class='partner_div'>
+      <button class='partner_btn'>其他小程序</button>
+    </view>
+  </view>
+
+  
+
+  <!--<button class='btn' bindtap='test'>
+    
+  </button>-->
+
+
+  
+</view>

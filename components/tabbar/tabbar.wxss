@@ -1,0 +1,86 @@
+.top_bar{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: red;
+  text-align: center;
+  position: fixed;
+  top: -17px;
+  right: -17px;
+  z-index: 100;
+}
+.top_bar .text,
+.top_bar .text_open{
+  font-size: 20px;
+  color: #fff;
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  transition: all .5s;
+  transform: rotate(0deg);
+  transform-origin: center center;
+  -moz-transform-origin: center center;
+  -o-transform-origin: center center;
+  -ms-transform-origin: center center;
+  -webkit-transform-origin: center center;
+}
+.top_bar .text_open{
+  transform: rotate(765deg);
+}
+.top_bar_2td,
+.top_bar_2td_open{
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #ffaeb0;
+  position: absolute;
+  top: -24px;
+  right: -24px;
+  z-index: 50;
+  transition: all .5s;
+}
+.top_bar_2td_open{
+  width:130px;
+  height: 130px; 
+  top: -57px;
+  right: -57px;
+}
+.topbar_btn1,
+.topbar_btn2,
+.topbar_btn3,
+.topbar_btn1_open,
+.topbar_btn2_open,
+.topbar_btn3_open{
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  z-index: 75;
+  transition: all .5s;
+}
+.topbar_btn1,
+.topbar_btn2,
+.topbar_btn3{
+  top:25px;
+  left: 19px;
+}
+.topbar_btn1_open{
+  top: 59px;
+  left: 12px;
+}
+.topbar_btn2_open{
+  top: 84px;
+  left: 26px;
+}
+.topbar_btn3_open{
+  top: 96px;
+  left: 51px;
+}
+.topbar_btn1 image,
+.topbar_btn2 image,
+.topbar_btn3 image,
+.topbar_btn1_open image,
+.topbar_btn2_open image,
+.topbar_btn3_open image{
+  width: 100%;
+  height: 100%;
+}
