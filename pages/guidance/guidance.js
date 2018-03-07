@@ -1,13 +1,41 @@
 // pages/guidance/guidance.js
+const app = getApp()
+var input_text = '输入导览编号'
+var t = ''
+var a=1
 Page({
 
   /**
    * 页面的初始数据
    */
-  data: {
   
+  data: {
+    text: input_text
   },
-
+  tap_key:function(e){
+    var i = e.target.id
+    if (a==1){
+      t=''
+      a=0
+    }
+    this.setData({
+      text: t += i
+    })
+  },
+  remove_key:function(){
+    t = t.substring(0, t.length - 1)
+    if (t.length > 0 && a==0){
+      this.setData({
+        text: t
+      })
+    }else{
+      a=1
+      t = '输入导览编号'
+      this.setData({
+        text: t
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */

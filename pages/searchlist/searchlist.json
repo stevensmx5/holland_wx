@@ -1,1 +1,5 @@
-{}
+{
+  "usingComponents": {
+    "topbar": "../../components/keyboard_num/keyboard_num"
+  }
+}

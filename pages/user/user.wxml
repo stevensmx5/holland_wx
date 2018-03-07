@@ -6,7 +6,7 @@
       <image class='useravatar' src='{{userInfo.avatarUrl}}'></image>
     </block>
   </view>
-  <view class='userinfo_content'>
+  <!-- <view class='userinfo_content'>
     <view class='userinfo_text'>
       <view>姓名</view>
       <view>Stella Summers</view>
@@ -19,7 +19,7 @@
       <view>邮箱</view>
       <view>Summer@qq.com</view>
     </view>
-  </view>
+  </view> -->
   <view class='my_record_box'>
     <view class="record_type {{check==0?'active':''}}" bindtap='recordtype'>我的收藏</view>
     <view class="record_type {{check==1?'active':''}}" bindtap='recordtype'>浏览记录</view>

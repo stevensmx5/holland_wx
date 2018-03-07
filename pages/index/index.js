@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+var util = require('../../utils/util.js');
 Page({
   data: {
     loading: false,
@@ -26,12 +26,12 @@ Page({
       Hei: swiperH　　　　　　　　//设置高度
     })
   },
-  scenic_page:function(){
-    // var id=e.target.id
-    // wx.setStorage({
-    //   key: 'page_id',
-    //   data: id
-    // })
+  scenic_page:function(e){
+    var id=e.target.id
+    wx.setStorage({
+      key: 'page_id',
+      data: id
+    })
     wx.switchTab({
       url: '../scenic/scenic'
     })

@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+var util = require('../../utils/util.js');
 Page({
   data: {
     loading: false,
@@ -11,7 +11,7 @@ Page({
   },
   guidance:function(){
     wx.navigateTo({
-      url: '../guidancecompanion/guidancecompanion'
+      url: '../guidance/guidance'
     })
   },
   imgH: function (e) {

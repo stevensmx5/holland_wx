@@ -1,1 +1,106 @@
 /* pages/guidance/guidance.wxss */
+page{
+  background-color: #fff;
+}
+.companion_text{
+  width: 100%;
+  float: left;
+  box-sizing: border-box;
+  padding: 30px 20px 20px 20px;
+}
+.companion_text .topline,
+.companion_text .bottomline{
+  width: 70px;
+  height: 1px;
+  float: left;
+  margin-left: 50%;
+  transform: translateX(-35px);
+  background-color: #c2c2c2;
+}
+.companion_text text{
+  width: 100%;
+  float: left;
+  font-size: 14px;
+  color: #020202;
+  text-align: center;
+  line-height: 24px;
+  padding: 8px 0px;
+}
+.video_box{
+  width: 100%;
+  float: left;
+}
+.video_box .companion_img{
+  width: 100%;
+  float: left;
+}
+.video_box text{
+  width: 100%;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  color: #020202;
+  margin: 15px 0px;
+  font-weight: bold;
+}
+.bottom_input_box{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+.bottom_input{
+  width: 100%;
+  height: 50px;
+  float: left;
+  background-color: #f4f4f6;
+  box-sizing: border-box;
+  padding: 8px 30px;
+  border-top: 1px solid #e1e1e1;
+}
+.bottom_input .simulate_input{
+  width: 100%;
+  height: 34px;
+  border: 1px solid #e1e1e1;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 7px 10px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 5px;
+}
+
+.keyboard_box{
+  width: 100%;
+  float: left;
+  box-sizing: border-box;
+  padding: 15px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ced3da;
+}
+.keyboard_box .keyboard_layout{
+  width: 25%;
+  padding: 15px 0px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.keyboard_box .keyboard_layout .keyboard_btn{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  font-size: 24px;
+  color: #636363;
+}
+.keyboard_box .keyboard_layout .select_btn{
+  background-color: #fa2a00;
+}
+.keyboard_box .keyboard_layout .ck_kb{
+  background-color: #e2e2e2;
+}
+.keyboard_box .keyboard_layout .keyboard_btn image{
+  width: 30px;
+  height: 30px;
+}

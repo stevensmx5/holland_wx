@@ -4,8 +4,7 @@
     "pages/scenic/scenic",
     "pages/user/user",
     "pages/searchlist/searchlist",
-    "pages/guidance/guidance",
-    "pages/guidancecompanion/guidancecompanion"
+    "pages/guidance/guidance"
     
   ],
   "tabBar": {

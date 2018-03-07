@@ -8,6 +8,7 @@ page{
   float: left;
   position: relative;
   background-color: #fa2a00;
+  margin-bottom: 50px;
 }
 .userinfo .username{
   width: 100%;
@@ -28,7 +29,6 @@ page{
 .userinfo_content{
   width: 100%;
   float: left;
-  padding-top: 50px;
 }
 .userinfo_content .userinfo_text{
   box-sizing: border-box;

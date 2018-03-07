@@ -19,11 +19,31 @@ App({
             'content-type': 'application/x-www-form-urlencoded'
           },
           success:function(e){
+            wx.setStorage({
+              key: 'user_openid',
+              data: e.data.OpenId
+            })
+            wx.getUserInfo({
+              success:function(i){
+                var userInfo = i.userInfo
+                var nickName = userInfo.nickName
+                var avatarUrl = userInfo.avatarUrl
+                var gender = userInfo.gender
+                wx.request({
+                  url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/sub/webservice/pageinfo.php',
+                  data:{
+                    Vcl_FunName:'UploadUserInfo',
+                    Vcl_OpenId: e.data.OpenId,
+                    Vcl_Photo:avatarUrl,
+                    Vcl_Nickname:nickName,
+                    Vcl_Sex: gender
+                  }
+                })
+              }
+            })
             // console.log(e.data.OpenId)
           }
         })
-        // console.log(res)
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
     // 获取用户信息

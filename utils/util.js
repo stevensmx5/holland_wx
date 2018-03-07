@@ -14,6 +14,96 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+function user_login(){
+  wx.login({
+    success: res => {
+      wx.request({
+        url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/sub/webservice/pageinfo.php',
+        data: {
+          Vcl_FunName: 'GetUserOpenId',
+          Vcl_JsCode: res.code
+        },
+        method: "POST",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (e) {
+          wx.setStorage({
+            key: 'user_openid',
+            data: e.data.OpenId
+          })
+          wx.getUserInfo({
+            success: function (i) {
+              var userInfo = i.userInfo
+              var nickName = userInfo.nickName
+              var avatarUrl = userInfo.avatarUrl
+              var gender = userInfo.gender
+              wx.request({
+                url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/sub/webservice/pageinfo.php',
+                data: {
+                  Vcl_FunName: 'UploadUserInfo',
+                  Vcl_OpenId: e.data.OpenId,
+                  Vcl_Photo: avatarUrl,
+                  Vcl_Nickname: nickName,
+                  Vcl_Sex: gender
+                }
+              })
+            }
+          })
+          // console.log(e.data.OpenId)
+        }
+      })
+    }
+  })
+}
+function check_login(){
+  wx.checkSession({
+    fail:function(){
+      wx.login({
+        success: res => {
+          wx.request({
+            url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/sub/webservice/pageinfo.php',
+            data: {
+              Vcl_FunName: 'GetUserOpenId',
+              Vcl_JsCode: res.code
+            },
+            method: "POST",
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            success: function (e) {
+              wx.setStorage({
+                key: 'user_openid',
+                data: e.data.OpenId
+              })
+              wx.getUserInfo({
+                success: function (i) {
+                  var userInfo = i.userInfo
+                  var nickName = userInfo.nickName
+                  var avatarUrl = userInfo.avatarUrl
+                  var gender = userInfo.gender
+                  wx.request({
+                    url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/sub/webservice/pageinfo.php',
+                    data: {
+                      Vcl_FunName: 'UploadUserInfo',
+                      Vcl_OpenId: e.data.OpenId,
+                      Vcl_Photo: avatarUrl,
+                      Vcl_Nickname: nickName,
+                      Vcl_Sex: gender
+                    }
+                  })
+                }
+              })
+              // console.log(e.data.OpenId)
+            }
+          })
+        }
+      })
+    }
+  })
+}
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  user_login: user_login,
+  check_login: check_login
 }
