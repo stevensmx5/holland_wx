@@ -26,9 +26,9 @@
     <view class="bottom_line {{check==0?'left':'right'}}"></view>
   </view>
   <scroll-view scroll-x='true' class='record_list'>
-    <block wx:for='{{record_ulr}}'>
+    <block wx:for='{{favorit_data}}'>
       <view class='record_list_img'>
-        <image src='{{item}}' mode='widthFix'></image>
+        <image id='{{item.Id}}' src='{{buplic_url}}{{item.Icon}}' mode='widthFix'></image>
       </view>
     </block>
   </scroll-view>

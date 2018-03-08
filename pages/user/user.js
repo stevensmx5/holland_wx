@@ -7,17 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     check:0,
-    record_ulr:[
-      '../../images/img1.jpg',
-      '../../images/img2.jpg',
-      '../../images/img3.jpg',
-      '../../images/img1.jpg',
-      '../../images/img2.jpg',
-    ]
+    buplic_url: app.url,
   },
   recordtype: function () {
     var n = this.data.check;
@@ -36,7 +27,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that=this
+    wx.getStorage({
+      key: 'user_openid',
+      success: function(uid) {
+        wx.request({
+          url: app.url + 'sub/webservice/pageinfo.php',
+          data: {
+            Vcl_FunName: 'GetUserFavoriteList',
+            Vcl_OpenId: uid.data
+          },
+          method: "POST",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            that.setData({
+              favorit_data: res.data
+            })
+            console.log(res.data)
+          }
+        })
+      },
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

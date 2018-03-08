@@ -37,6 +37,10 @@ App({
                     Vcl_Photo:avatarUrl,
                     Vcl_Nickname:nickName,
                     Vcl_Sex: gender
+                  },
+                  method: "POST",
+                  header: {
+                    'content-type': 'application/x-www-form-urlencoded'
                   }
                 })
               }
@@ -70,5 +74,5 @@ App({
   globalData: {
     userInfo: null
   },
-  url_test: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/'
+  url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/'
 })

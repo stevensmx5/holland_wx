@@ -6,12 +6,64 @@ Page({
   data: {
     loading: false,
     plain: false,
-    buplic_url: app.url_test,
-    buplic_url: app.url_test
+    buplic_url: app.url,
+    fit:0
   },
   guidance:function(){
     wx.navigateTo({
       url: '../guidance/guidance'
+    })
+  },
+  favorit:function(e){
+    var that=this
+    var a = e.target.id
+    util.check_login()
+    wx.getStorage({
+      key: 'page_id',
+      success: function(pid) {
+        wx.getStorage({
+          key: 'user_openid',
+          success: function(uid) {
+            if (a == 0) {
+              wx.request({
+                url: app.url + 'sub/webservice/pageinfo.php',
+                data: {
+                  Vcl_FunName: 'UserFavoriteAdd',
+                  Vcl_AccountId: pid.data,
+                  Vcl_OpenId: uid.data
+                }, 
+                method: "POST",
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded'
+                },
+                success:function(res){
+                  that.setData({
+                    fit: 1
+                  })
+                }
+              })
+            } else {
+              wx.request({
+                url: app.url + 'sub/webservice/pageinfo.php',
+                data: {
+                  Vcl_FunName: 'UserFavoriteDelete',
+                  Vcl_AccountId: pid.data,
+                  Vcl_OpenId: uid.data
+                },
+                method: "POST",
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded'
+                },
+                success: function () {
+                  that.setData({
+                    fit: 0
+                  })
+                }
+              })
+            }
+          },
+        })
+      },
     })
   },
   imgH: function (e) {
@@ -54,53 +106,67 @@ Page({
   },
   onShow:function(){
     var that = this
-    wx.setTabBarItem({
-      index: 1,
-      text: '荷兰国立博物馆'
-    }),
     wx.getStorage({
       key: 'page_id',
-      success: function(res) {
-        // console.log(res.data)
+      success: function(id) {
+        wx.getStorage({
+          key: 'user_openid',
+          success: function(uid) {
+            wx.request({
+              url: app.url + 'sub/webservice/pageinfo.php',
+              data: {
+                Vcl_FunName: 'GetAccountBaseInfo',
+                Vcl_Id: id.data,
+                Vcl_OpenId: uid.data
+              },
+              method: "POST",
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              success: function (res) {
+                var name = decodeURIComponent(res.data.Name)
+                var enname = decodeURIComponent(res.data.EnName)
+                var bg_img = res.data.BackgroundImage
+                var type = decodeURIComponent(res.data.Type)
+                var favorite = res.data.Favorite
+                var sub_program = res.data.SubProgram
+                for (var i = 0; i < sub_program.length; i++) {
+                  var data = sub_program[i].Name;
+                  sub_program[i].Name = decodeURIComponent(data)
+                }
 
-        
-        wx.request({
-          url: app.url_test + 'sub/webservice/pageinfo.php',
-          data: {
-            Vcl_FunName: 'GetAccountBaseInfo',
-            Vcl_Id: res.data,
-            Vcl_OpenId:'1234567890'
-          },
-          method: "POST",
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success: function (res) {
-            var name = decodeURIComponent(res.data.Name)
-            var enname = decodeURIComponent(res.data.EnName)
-            var bg_img = res.data.BackgroundImage
-            var type = decodeURIComponent(res.data.Type)
-            var sub_program = res.data.SubProgram
-            for (var i = 0; i < sub_program.length; i++) {
-              var data = sub_program[i].Name;
-              sub_program[i].Name = decodeURIComponent(data)  
-            } 
-
-            that.setData({
-              ChName: name,
-              EnName: enname,
-              BackgroundImage: app.url_test + bg_img,
-              Type: type,
-              SubProgram: sub_program
+                wx.setTabBarItem({
+                  index: 1,
+                  text: name
+                })
+                that.setData({
+                  ChName: name,
+                  EnName: enname,
+                  BackgroundImage: app.url + res.data.BackgroundImage,
+                  Type: type,
+                  fit: favorite,
+                  SubProgram: sub_program
+                })
+              }
             })
-            // console.log(res.data)
-            // console.log(enname)
-            // console.log(bg_img)
-            // console.log(type)
-            // console.log(sub_program)
-            // console.log(JSON.parse(program))
+            wx.request({
+              url: app.url + 'sub/webservice/pageinfo.php',
+              data: {
+                Vcl_FunName: 'UserHistoryAdd',
+                Vcl_AccountId: id.data,
+                Vcl_OpenId: uid.data
+              },
+              method: "POST",
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              // success:function(res){
+              //   console.log(id.data)
+              // }
+            })
           }
         })
+        
       },
     })
     

@@ -8,7 +8,7 @@ page{
   float: left;
   position: relative;
   background-color: #fa2a00;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
 }
 .userinfo .username{
   width: 100%;

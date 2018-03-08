@@ -5,7 +5,7 @@
   <view class='scenic_content'>
     <view class='scenic_type_box'>
       <view class='scenic_type'>{{Type}}</view>
-      <image src='../../images/star.png'></image>
+      <image id='{{fit}}' src="{{fit == 0 ? '../../images/star.png':'../../images/star_checked.png'}}" bindtap='favorit'></image>
       <view class='name_ch'>{{ChName}}</view>
       <view class='name_en'>{{EnName}}</view>
     </view>

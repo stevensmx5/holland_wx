@@ -6,7 +6,7 @@ Page({
   data: {
     loading: false,
     plain: false,
-    buplic_url: app.url_test
+    buplic_url: app.url
   },
   //https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/
   search:function(){
@@ -39,7 +39,7 @@ Page({
   onLoad: function () {
     var that = this
     wx.request({
-      url: app.url_test + 'sub/webservice/pageinfo.php',
+      url: app.url + 'sub/webservice/pageinfo.php',
       data: {
         Vcl_FunName: 'GetHomepagePicture',
       },
@@ -57,10 +57,10 @@ Page({
         // console.log(img_url)
         that.setData({
           img_data:res.data,
-
+          
         })
 
-        // console.log(img_data)
+        //  console.log(res.data)
       }
     })
     if (app.globalData.userInfo) {
@@ -92,10 +92,10 @@ Page({
     
   },
   onShow: function () {
-    wx.setTabBarItem({
-      index: 1,
-      text: '景点'
-    })
+    // wx.setTabBarItem({
+    //   index: 1,
+    //   text: '景点'
+    // })
   },
   getUserInfo: function(e) {
     console.log(e)
