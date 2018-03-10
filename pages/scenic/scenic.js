@@ -11,7 +11,7 @@ Page({
   },
   guidance:function(){
     wx.navigateTo({
-      url: '../guidance/guidance'
+      url: '../guidance_web/guidance_web'
     })
   },
   favorit:function(e){

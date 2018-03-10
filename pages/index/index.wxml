@@ -1,10 +1,10 @@
 <!--index.wxml-->
 <view class="container">
   <view class='location_logo'>
-    <view class='location_box'>
+    <!-- <view class='location_box'>
       <image class='location_icon' src='../../images/location.png'></image>
       <text class='location_text'>location</text>
-    </view>
+    </view> -->
     <view class='logo_box'>
       <image class='logo_icon' src='../../images/holland_logo.png' mode='widthFix'></image>
     </view>
@@ -25,7 +25,7 @@
       <block wx:for="{{img_data}}" >
         <swiper-item>
           <view class='top_img' bindtap='scenic_page'>
-            <image id='{{item[0]}}' bindtap='img_test' src='{{buplic_url}}{{item[1]}}'mode="widthFix" bindload='imgH'></image>
+            <image id='{{item[0]}}' src='{{buplic_url}}{{item[1]}}'mode="widthFix" bindload='imgH'></image>
           </view>
         </swiper-item>
       </block>

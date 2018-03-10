@@ -28,7 +28,7 @@
   <scroll-view scroll-x='true' class='record_list'>
     <block wx:for='{{favorit_data}}'>
       <view class='record_list_img'>
-        <image id='{{item.Id}}' src='{{buplic_url}}{{item.Icon}}' mode='widthFix'></image>
+        <image id='{{item.Id}}' src='{{buplic_url}}{{item.Icon}}' mode='widthFix' bindtap='scenic_page'></image>
       </view>
     </block>
   </scroll-view>

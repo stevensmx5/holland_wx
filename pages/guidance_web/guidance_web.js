@@ -1,52 +1,30 @@
-// pages/guidance/guidance.js
-const app = getApp()
-var input_text = '输入导览编号'
-var t = ''
-var a=1
-Page({
+// pages/guidance_web/guidance_web.js
 
+const app = getApp()
+var page_url = 'sub/sub_function/1/index.php?account_id='
+Page({
   /**
    * 页面的初始数据
    */
-  
   data: {
-    text: input_text,
-    win_h:'',
+    
   },
-  tap_key:function(e){
-    var i = e.target.id
-    if (a==1){
-      t=''
-      a=0
-    }
-    this.setData({
-      text: t += i
-    })
-  },
-  remove_key:function(){
-    t = t.substring(0, t.length - 1)
-    if (t.length > 0 && a==0){
-      this.setData({
-        text: t
-      })
-    }else{
-      a=1
-      t = '输入导览编号'
-      this.setData({
-        text: t
-      })
-    }
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var thst=this
-    var winH = wx.getSystemInfoSync().windowHeight+'px'
-    this.setData({
-      win_h: winH
+    var that=this
+
+    wx.getStorage({
+      key: 'page_id',
+      success: function(res) {
+        that.setData({
+          url: app.url + page_url + res.data
+        })
+        console.log(app.url + page_url + res.data)
+      },
     })
-    console.log(winH)
   },
 
   /**

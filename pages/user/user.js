@@ -12,25 +12,105 @@ Page({
   },
   recordtype: function () {
     var n = this.data.check;
+    var that = this
     //console.log(n)
     if (n == 0) {
       this.setData({
         check: 1
       })
+      wx.getStorage({
+        key: 'user_openid',
+        success: function (uid) {
+
+          wx.request({
+            url: app.url + 'sub/webservice/pageinfo.php',
+            data: {
+              Vcl_FunName: 'GetUserHistoryList',
+              Vcl_OpenId: uid.data
+            },
+            method: "POST",
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            success: function (res) {
+              that.setData({
+                favorit_data: res.data
+              })
+            }
+          })
+        }
+      })
     } else {
       this.setData({
         check: 0
       })
+      wx.getStorage({
+        key: 'user_openid',
+        success: function (uid) {
+          wx.request({
+            url: app.url + 'sub/webservice/pageinfo.php',
+            data: {
+              Vcl_FunName: 'GetUserFavoriteList',
+              Vcl_OpenId: uid.data
+            },
+            method: "POST",
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            success: function (res) {
+              that.setData({
+                favorit_data: res.data
+              })
+            }
+          })
+
+        }
+      })
     }
+  },
+  scenic_page: function (e) {
+    var id = e.target.id
+    wx.setStorage({
+      key: 'page_id',
+      data: id
+    })
+    wx.switchTab({
+      url: '../scenic/scenic'
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this
+    
+  },
+
+  getUserInfo: function (e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var that = this
+    this.setData({
+      check: 0
+    })
     wx.getStorage({
       key: 'user_openid',
-      success: function(uid) {
+      success: function (uid) {
         wx.request({
           url: app.url + 'sub/webservice/pageinfo.php',
           data: {
@@ -44,6 +124,23 @@ Page({
           success: function (res) {
             that.setData({
               favorit_data: res.data
+            })
+          }
+        })
+
+        wx.request({
+          url: app.url + 'sub/webservice/pageinfo.php',
+          data: {
+            Vcl_FunName: 'GetUserHistoryList',
+            Vcl_OpenId: uid.data
+          },
+          method: "POST",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            that.setData({
+              history: res.data
             })
             console.log(res.data)
           }
@@ -76,28 +173,6 @@ Page({
         }
       })
     }
-  },
-
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
   },
 
   /**

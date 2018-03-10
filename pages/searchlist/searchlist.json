@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "topbar": "../../components/keyboard_num/keyboard_num"
+    "topbar": "../../components/tabbar/tabbar"
   }
 }

@@ -1,4 +1,4 @@
-<view class='container'>
+<view class='container' style='min-height:{{win_h}}'>
   <view class='companion_text'>
     <view class='topline'></view>
     <text>欢迎进入荷兰国立博物馆，从这里，开启您的荷兰

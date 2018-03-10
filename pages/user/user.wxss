@@ -77,13 +77,19 @@ page{
 .my_record_box .right{
   margin-left: 75%;
 }
-.record_list{
+.record_list,
+.record_list_dis{
   width: 100%;
   float: left;
   white-space:nowrap;
   padding: 25px 0px;
+  display: block;
 }
-.record_list .record_list_img{
+.record_list_dis{
+  display: none;
+}
+.record_list .record_list_img,
+.record_list_dis .record_list_img{
   width: 32%;
   display: inline-block;
   margin-right: 15px;
