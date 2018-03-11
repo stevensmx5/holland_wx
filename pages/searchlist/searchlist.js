@@ -1,17 +1,89 @@
 // pages/searchlist/searchlist.js
+const app = getApp()
+var search_val = '';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    search_result:[
-      '../../images/list_img1.jpg',
-      '../../images/list_img2.jpg',
-      '../../images/list_img3.jpg',
-      '../../images/list_img1.jpg',
-      '../../images/list_img3.jpg',
-    ]
+    input_text: '',
+    buplic_url: app.url,
+  },
+  get_val: function (e) {
+    search_val = e.detail.value
+    wx.setStorage({
+      key: 'index_search',
+      data: search_val
+    })
+    // console.log(search_val)
+  },
+  search:function(){
+    var that = this
+    wx.getStorage({
+      key: 'index_search',
+      success: function (search_key) {
+        wx.request({
+          url: app.url + 'sub/webservice/pageinfo.php',
+          data: {
+            Vcl_FunName: 'GetSearchResult',
+            Vcl_Key: search_key.data
+          },
+          method: "POST",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            that.setData({
+              Search_Val: res.data,
+              Num: res.data.length,
+              input_text: search_key.data
+            })
+            // console.log(res.data)
+          }
+        })
+      },
+    })
+  },
+  scenic_page: function (e) {
+    var id = e.target.id
+    wx.setStorage({
+      key: 'page_id',
+      data: id
+    })
+    wx.switchTab({
+      url: '../scenic/scenic'
+    })
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var that=this
+    wx.getStorage({
+      key: 'index_search',
+      success: function (search_key) {
+        wx.request({
+          url: app.url + 'sub/webservice/pageinfo.php',
+          data: {
+            Vcl_FunName: 'GetSearchResult',
+            Vcl_Key: search_key.data
+          },
+          method: "POST",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success:function(res){
+            that.setData({
+              Search_Val:res.data,
+              Num:res.data.length,
+              input_text: search_key.data
+            })
+            // console.log(res.data)
+          }
+        })
+      },
+    })
   },
 
   /**
@@ -25,13 +97,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
   
   },
 

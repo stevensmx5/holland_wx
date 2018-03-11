@@ -12,7 +12,7 @@
   <view class='search_box'>
     <view class='search_div'>
       <image class='search_icon' src='../../images/search_icon.png' bindtap='search'></image>
-      <input placeholder='搜索'></input>
+      <input placeholder='搜索' type='text' bindinput='get_val' confirm-type='search' bindconfirm='search'></input>
     </view>
   </view>
   <view class='recommend_text'>

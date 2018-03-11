@@ -2,13 +2,21 @@
 //获取应用实例
 const app = getApp()
 var util = require('../../utils/util.js');
+var search_val='';
 Page({
   data: {
     loading: false,
     plain: false,
-    buplic_url: app.url
+    buplic_url: app.url,
   },
-  //https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/
+  get_val:function(e){
+    search_val= e.detail.value
+    wx.setStorage({
+      key:'index_search',
+      data: search_val
+    })
+    // console.log(search_val)
+  },
   search:function(){
     wx.navigateTo({
       url: '../searchlist/searchlist'
