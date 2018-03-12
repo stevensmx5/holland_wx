@@ -42,6 +42,10 @@ Page({
                   })
                 }
               })
+              wx.showToast({
+                title: '您已成功收藏',
+                icon: 'none'
+              })
             } else {
               wx.request({
                 url: app.url + 'sub/webservice/pageinfo.php',
@@ -59,6 +63,10 @@ Page({
                     fit: 0
                   })
                 }
+              })
+              wx.showToast({
+                title: '取消收藏',
+                icon:'none'
               })
             }
           },
