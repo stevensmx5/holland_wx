@@ -18,7 +18,7 @@ function user_login(){
   wx.login({
     success: res => {
       wx.request({
-        url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/sub/webservice/pageinfo.php',
+        url: 'https://www.hollandinfo.cn/xcx/sub/webservice/pageinfo.php',
         data: {
           Vcl_FunName: 'GetUserOpenId',
           Vcl_JsCode: res.code
@@ -39,7 +39,7 @@ function user_login(){
               var avatarUrl = userInfo.avatarUrl
               var gender = userInfo.gender
               wx.request({
-                url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/sub/webservice/pageinfo.php',
+                url: 'https://www.hollandinfo.cn/xcx/sub/webservice/pageinfo.php',
                 data: {
                   Vcl_FunName: 'UploadUserInfo',
                   Vcl_OpenId: e.data.OpenId,
@@ -65,7 +65,7 @@ function check_login(){
       wx.login({
         success: res => {
           wx.request({
-            url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/sub/webservice/pageinfo.php',
+            url: 'https://www.hollandinfo.cn/xcx/sub/webservice/pageinfo.php',
             data: {
               Vcl_FunName: 'GetUserOpenId',
               Vcl_JsCode: res.code
@@ -86,7 +86,7 @@ function check_login(){
                   var avatarUrl = userInfo.avatarUrl
                   var gender = userInfo.gender
                   wx.request({
-                    url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/sub/webservice/pageinfo.php',
+                    url: 'https://www.hollandinfo.cn/xcx/sub/webservice/pageinfo.php',
                     data: {
                       Vcl_FunName: 'UploadUserInfo',
                       Vcl_OpenId: e.data.OpenId,

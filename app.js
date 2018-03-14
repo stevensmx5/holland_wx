@@ -9,7 +9,7 @@ App({
     wx.login({
       success: res => {
         wx.request({
-          url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/sub/webservice/pageinfo.php',
+          url: 'https://www.hollandinfo.cn/xcx/sub/webservice/pageinfo.php',
           data:{
             Vcl_FunName: 'GetUserOpenId',
             Vcl_JsCode: res.code
@@ -30,7 +30,7 @@ App({
                 var avatarUrl = userInfo.avatarUrl
                 var gender = userInfo.gender
                 wx.request({
-                  url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/sub/webservice/pageinfo.php',
+                  url: 'https://www.hollandinfo.cn/xcx/sub/webservice/pageinfo.php',
                   data:{
                     Vcl_FunName:'UploadUserInfo',
                     Vcl_OpenId: e.data.OpenId,
@@ -74,5 +74,5 @@ App({
   globalData: {
     userInfo: null
   },
-  url: 'https://www.amsterdamairportschiphol.cn/app/hollandinfo/xcx/'
+  url: 'https://www.hollandinfo.cn/xcx/'
 })

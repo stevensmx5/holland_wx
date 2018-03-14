@@ -83,7 +83,7 @@ Page({
       Hei: swiperH　　　　　　　　//设置高度
     })
   },
-  onLoad: function () {
+  onLoad: function (options) {
     
     if (app.globalData.userInfo) {
       this.setData({
@@ -112,19 +112,19 @@ Page({
       })
     }
   },
-  onShow:function(){
+  onShow: function () {
     var that = this
     wx.getStorage({
       key: 'page_id',
-      success: function(id) {
+      complete: function(pid) {
         wx.getStorage({
           key: 'user_openid',
-          success: function(uid) {
+          complete: function(uid) {
             wx.request({
               url: app.url + 'sub/webservice/pageinfo.php',
               data: {
                 Vcl_FunName: 'GetAccountBaseInfo',
-                Vcl_Id: id.data,
+                Vcl_Id: pid.data,
                 Vcl_OpenId: uid.data
               },
               method: "POST",
@@ -132,6 +132,7 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded'
               },
               success: function (res) {
+                // console.log(res.data)
                 var name = decodeURIComponent(res.data.Name)
                 var enname = decodeURIComponent(res.data.EnName)
                 var bg_img = res.data.BackgroundImage
@@ -142,6 +143,11 @@ Page({
                   var data = sub_program[i].Name;
                   sub_program[i].Name = decodeURIComponent(data)
                 }
+
+                wx.setStorage({
+                  key: 'page_id',
+                  data: res.data.Id
+                })
 
                 wx.setTabBarItem({
                   index: 1,
@@ -161,7 +167,7 @@ Page({
               url: app.url + 'sub/webservice/pageinfo.php',
               data: {
                 Vcl_FunName: 'UserHistoryAdd',
-                Vcl_AccountId: id.data,
+                Vcl_AccountId: pid.data,
                 Vcl_OpenId: uid.data
               },
               method: "POST",
