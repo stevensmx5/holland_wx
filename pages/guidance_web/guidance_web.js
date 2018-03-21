@@ -14,15 +14,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this
-
+    var that = this
     wx.getStorage({
       key: 'page_id',
       success: function(res) {
         that.setData({
           url: app.url + page_url + res.data
         })
-        console.log(app.url + page_url + res.data)
+        // console.log(app.url + page_url + res.data)
       },
     })
   },

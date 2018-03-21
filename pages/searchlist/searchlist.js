@@ -9,6 +9,8 @@ Page({
   data: {
     input_text: '',
     buplic_url: app.url,
+    bg_url: 'images/home_background.jpg',
+    win_h: ''
   },
   get_val: function (e) {
     search_val = e.detail.value
@@ -60,6 +62,10 @@ Page({
    */
   onShow: function () {
     var that=this
+    var winH = wx.getSystemInfoSync().windowHeight + 'px'
+    this.setData({
+      win_h: winH
+    })
     wx.getStorage({
       key: 'index_search',
       success: function (search_key) {

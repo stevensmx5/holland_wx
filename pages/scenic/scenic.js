@@ -2,6 +2,9 @@
 //获取应用实例
 const app = getApp()
 var util = require('../../utils/util.js');
+
+
+var page_id
 Page({
   data: {
     loading: false,
@@ -9,9 +12,27 @@ Page({
     buplic_url: app.url,
     fit:0
   },
-  guidance:function(){
-    wx.navigateTo({
-      url: '../guidance_web/guidance_web'
+  guidance: function (e) {
+      // wx.navigateTo({
+      //   url: '../guidance_web/guidance_web'
+      // })
+    var id = e.target.id
+    if (id == 1) {
+      wx.navigateTo({
+        url: '../guidance_web/guidance_web?id=1'
+      })
+    }
+  },
+  thirdparty: function (event) {
+    var id = event.currentTarget.dataset.appid
+    var page = event.currentTarget.dataset.page
+    wx.navigateToMiniProgram({
+      appId: id,
+      path: page,
+      envVersion: 'trial',
+      // success:function(){
+      //   console.log(id)
+      // }
     })
   },
   favorit:function(e){
@@ -84,7 +105,15 @@ Page({
     })
   },
   onLoad: function (options) {
-    
+
+    if (options.id>0){
+      wx.setStorage({
+        key: 'page_id',
+        data: options.id,
+      })
+    }
+
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -112,8 +141,17 @@ Page({
       })
     }
   },
-  onShow: function () {
+  onShow: function (options) {
     var that = this
+
+    wx.getStorage({
+      key: 'page_id',
+      success: function (res) {
+        page_id = res.data
+      },
+    })
+
+    console.log(page_id)
     wx.getStorage({
       key: 'page_id',
       complete: function(pid) {
@@ -143,6 +181,12 @@ Page({
                   var data = sub_program[i].Name;
                   sub_program[i].Name = decodeURIComponent(data)
                 }
+                var thirdparty = res.data.Thirdparty
+                for (var i = 0; i < thirdparty.length; i++) {
+                  var data = thirdparty[i].Name;
+                  thirdparty[i].Name = decodeURIComponent(data)
+                }
+                // console.log(thirdparty)
 
                 wx.setStorage({
                   key: 'page_id',
@@ -159,7 +203,8 @@ Page({
                   BackgroundImage: app.url + res.data.BackgroundImage,
                   Type: type,
                   fit: favorite,
-                  SubProgram: sub_program
+                  SubProgram: sub_program,
+                  Thirdparty:thirdparty
                 })
               }
             })
@@ -186,7 +231,7 @@ Page({
     
   },
   getUserInfo: function (e) {
-    console.log(e)
+    // console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

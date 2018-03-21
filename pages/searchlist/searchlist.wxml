@@ -1,15 +1,20 @@
 <!--pages/searchlist/searchlist.wxml-->
-<view class='container search_list_page'>
-  <view class='search_div'>
-    <image class='search_icon' src='../../images/searchlist_icon.png' bindtap='search'></image>
-    <input placeholder='搜索' value='{{input_text}}' bindinput='get_val' type='text' confirm-type='search' bindconfirm='search'></input>
+<view class='container search_list_page' style='min-height:{{win_h}}'>
+  <view class='page_bg'>
+    <image src='{{buplic_url}}{{bg_url}}' mode="widthFix"></image>
   </view>
-  <view class='search_length'>
-    搜索结果<text>{{Num}}</text>个
-  </view>
-  <view class='search_result'>
-    <block wx:for="{{Search_Val}}">
-      <image id='{{item.Id}}' src='{{buplic_url}}{{item.Icon}}' mode='widthFix' bindtap='scenic_page'></image>
-    </block>
+  <view class='page_content'>
+    <view class='search_div'>
+      <image class='search_icon' src='../../images/searchlist_icon.png' bindtap='search'></image>
+      <input placeholder='搜索' value='{{input_text}}' bindinput='get_val' type='text' confirm-type='search' bindconfirm='search'></input>
+    </view>
+    <view class='search_length'>
+      搜索结果<text>{{Num}}</text>个
+    </view>
+    <view class='search_result'>
+      <block wx:for="{{Search_Val}}">
+        <image id='{{item.Id}}' src='{{buplic_url}}{{item.Icon}}' mode='widthFix' bindtap='scenic_page'></image>
+      </block>
+    </view>
   </view>
 </view>

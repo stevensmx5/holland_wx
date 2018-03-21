@@ -4,12 +4,23 @@ page{
 image{
   display: block
 }
+.secnic_bg{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.secnic_bg image{
+  width: 100%;
+  display: block;
+}
 .scenic_content{
   width: 100%;
-  margin-top: 90%;
   z-index: 500;
   box-sizing: border-box;
   padding: 0px 25px;
+  margin-top: 90%;
 }
 .scenic_content .scenic_type_box{
   width: 100%;

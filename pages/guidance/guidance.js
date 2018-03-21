@@ -42,6 +42,7 @@ Page({
    */
   onLoad: function (options) {
     var thst=this
+
     var winH = wx.getSystemInfoSync().windowHeight+'px'
     this.setData({
       win_h: winH

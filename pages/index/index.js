@@ -8,6 +8,7 @@ Page({
     loading: false,
     plain: false,
     buplic_url: app.url,
+    bg_url:'images/home_background.jpg'
   },
   get_val:function(e){
     search_val= e.detail.value
@@ -22,9 +23,18 @@ Page({
       url: '../searchlist/searchlist'
     })
   },
-  // onReady:function(){
-  //   this.topbar=this.selectComponent("#topbar");
-  // },
+  thirdparty:function(event){
+    var id = event.currentTarget.dataset.appid
+    var page = event.currentTarget.dataset.page
+    wx.navigateToMiniProgram({
+      appId:id,
+      path:page,
+      envVersion: 'trial',
+      // success:function(){
+      //   console.log(id)
+      // }
+    })
+  },
   imgH: function (e) {
     var winWid = wx.getSystemInfoSync().windowWidth-160;         //获取当前屏幕的宽度
     var imgh = e.detail.height;　　　　　　　　　　　　　　　　//图片高度
@@ -40,32 +50,29 @@ Page({
       key: 'page_id',
       data: id
     })
-    wx.switchTab({
-      url: '../scenic/scenic'
-    })
+    if (id == 1) {
+      wx.switchTab({
+        url: '../scenic/scenic'
+      })
+    }
   },
   onLoad: function () {
     var that = this
     wx.request({
       url: app.url + 'sub/webservice/pageinfo.php',
       data: {
-        Vcl_FunName: 'GetHomepagePicture',
+        Vcl_FunName: 'GetHomepageInfo',
       },
       method: "POST",
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        var img_data = res.data
-        // for (i = 0; i < img_date.length; i++) {
-        //   var img_id = img_date[i][0]
-        //   var img_url = img_date[i][1]
-        // }
-        // console.log(img_id)
-        // console.log(img_url)
+        // console.log(res.data.Accounts)
+        // console.log(res.data.Thirdparty)
         that.setData({
-          img_data:res.data,
-          
+          img_data: res.data.Accounts,
+          thirdparty_data:res.data.Thirdparty
         })
 
         //  console.log(res.data)

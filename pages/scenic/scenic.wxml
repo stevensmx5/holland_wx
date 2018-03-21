@@ -1,5 +1,5 @@
 <view class='container'>
-  <view class='page_bg'>
+  <view class='secnic_bg'>
     <image src='{{BackgroundImage}}' mode="widthFix"></image>
   </view>
   <view class='scenic_content'>
@@ -10,22 +10,19 @@
       <view class='name_en'>{{EnName}}</view>
     </view>
     <view class='quick_toolbar_box'>
-      <view class='quick_toolbar'>
-        <button class='quick_toolbar_btn'>交 通</button>
-      </view>
-      <view class='quick_toolbar'>
-        <button class='quick_toolbar_btn'>门 票</button>
-      </view>
-      <view class='quick_toolbar'>
-        <button class='quick_toolbar_btn'>地 图</button>
-      </view>
+      <block wx:for="{{Thirdparty}}">
+        <view class='quick_toolbar'>
+          <button class='quick_toolbar_btn'data-appid='{{item.Appid}}' data-page='{{item.Page}}'  bindtap='thirdparty'>{{item.Name}}</button>
+        </view>
+      </block>
+      
     </view>
     <scroll-view scroll-x='true' class='recommend_scenic_box'>
       <block wx:for="{{SubProgram}}">
         <view class='recommend_scenic'>
-          <view class='recommend_scenic_img' bindtap='guidance' id='{{item.Id}}'>
-            <image class='recommend_scenic_bg' mode='widthFix' src='{{buplic_url}}{{item.LogoImage}}'></image>
-            <image class='recommend_scenic_icon' src='{{buplic_url}}{{item.LogoIcon}}'></image>
+          <view class='recommend_scenic_img' bindtap='guidance'>
+            <image id='{{item.Id}}' class='recommend_scenic_bg' mode='widthFix' src='{{buplic_url}}{{item.LogoImage}}'></image>
+            <image id='{{item.Id}}' class='recommend_scenic_icon' src='{{buplic_url}}{{item.LogoIcon}}'></image>
           </view>
           <view class='recommend_scenic_text'>{{item.Name}}</view>
         </view>
