@@ -17,12 +17,17 @@
       </block>
       
     </view>
+
+    <view class='video_box'>
+      <video id='account_video' class='video' mode='widthFix' src='{{video_src}}' bindfullscreenchange='screen_change'></video>
+    </view>
+
     <scroll-view scroll-x='true' class='recommend_scenic_box'>
       <block wx:for="{{SubProgram}}">
         <view class='recommend_scenic'>
-          <view class='recommend_scenic_img' bindtap='guidance'>
-            <image id='{{item.Id}}' class='recommend_scenic_bg' mode='widthFix' src='{{buplic_url}}{{item.LogoImage}}'></image>
-            <image id='{{item.Id}}' class='recommend_scenic_icon' src='{{buplic_url}}{{item.LogoIcon}}'></image>
+          <view class='recommend_scenic_img'id='{{item.Id}}'  data-link='{{item.Link}}' data-type='{{item.Type}}' bindtap='guidance'>
+            <image class='recommend_scenic_bg' mode='widthFix' src='{{buplic_url}}{{item.LogoImage}}'></image>
+            <image class='recommend_scenic_icon' src='{{buplic_url}}{{item.LogoIcon}}'></image>
           </view>
           <view class='recommend_scenic_text'>{{item.Name}}</view>
         </view>

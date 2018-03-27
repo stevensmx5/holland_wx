@@ -29,7 +29,7 @@ Page({
     wx.navigateToMiniProgram({
       appId:id,
       path:page,
-      envVersion: 'trial',
+      envVersion: 'release',
       // success:function(){
       //   console.log(id)
       // }
@@ -74,8 +74,6 @@ Page({
           img_data: res.data.Accounts,
           thirdparty_data:res.data.Thirdparty
         })
-
-        //  console.log(res.data)
       }
     })
     if (app.globalData.userInfo) {
@@ -113,7 +111,7 @@ Page({
     // })
   },
   getUserInfo: function(e) {
-    console.log(e)
+    //console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

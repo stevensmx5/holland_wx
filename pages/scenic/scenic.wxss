@@ -127,3 +127,14 @@ image{
   text-align: center;
   line-height: 16px;
 }
+
+.video_box{
+  width: 100%;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 0;
+}
+.video_box .video{
+  width: 100%;
+}

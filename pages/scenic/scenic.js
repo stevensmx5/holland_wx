@@ -10,26 +10,18 @@ Page({
     loading: false,
     plain: false,
     buplic_url: app.url,
-    fit:0
+    fit:0,
+    video_src:''
   },
-  guidance: function (e) {
-      // wx.navigateTo({
-      //   url: '../guidance_web/guidance_web'
-      // })
-    var id = e.target.id
-    if (id == 1) {
-      wx.navigateTo({
-        url: '../guidance_web/guidance_web?id=1'
-      })
-    }
-  },
+
+  
   thirdparty: function (event) {
     var id = event.currentTarget.dataset.appid
     var page = event.currentTarget.dataset.page
     wx.navigateToMiniProgram({
       appId: id,
       path: page,
-      envVersion: 'trial',
+      envVersion: 'release',
       // success:function(){
       //   console.log(id)
       // }
@@ -186,7 +178,7 @@ Page({
                   var data = thirdparty[i].Name;
                   thirdparty[i].Name = decodeURIComponent(data)
                 }
-                // console.log(thirdparty)
+                // console.log(sub_program)
 
                 wx.setStorage({
                   key: 'page_id',
@@ -229,6 +221,37 @@ Page({
       },
     })
     
+  },
+  onReady:function(){
+    this.videoContext=wx.createVideoContext('account_video')
+  },
+  guidance: function (event) {
+    var btn_type = event.currentTarget.dataset.type
+    var url = event.currentTarget.dataset.link
+    // console.log(id)
+    if (btn_type == 0) {
+      wx.setStorage({
+        key: 'navigate_page',
+        data: url,
+      })
+      wx.navigateTo({
+        url: '../guidance_web/guidance_web'
+      })
+    } else if (btn_type == 2) {
+      //console.log(app.url+url)
+      this.setData({
+        video_src: app.url + url
+      })
+      this.videoContext.play()
+      this.videoContext.requestFullScreen()
+    }
+  },
+  screen_change:function(event){
+    if (event.detail.fullScreen){
+      this.videoContext.play()
+    } else {
+      this.videoContext.pause()
+    }
   },
   getUserInfo: function (e) {
     // console.log(e)

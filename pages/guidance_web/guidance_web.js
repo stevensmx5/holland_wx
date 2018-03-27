@@ -1,7 +1,6 @@
 // pages/guidance_web/guidance_web.js
 
 const app = getApp()
-var page_url = 'sub/sub_function/1/index.php?account_id='
 Page({
   /**
    * 页面的初始数据
@@ -17,10 +16,16 @@ Page({
     var that = this
     wx.getStorage({
       key: 'page_id',
-      success: function(res) {
-        that.setData({
-          url: app.url + page_url + res.data
+      success: function(pid) {
+        wx.getStorage({
+          key: 'navigate_page',
+          success: function(page_url) {
+            that.setData({
+              url: app.url + page_url.data + '?account_id=' + pid.data
+            })
+          },
         })
+        
         // console.log(app.url + page_url + res.data)
       },
     })
