@@ -8,27 +8,28 @@ Page({
   data: {
     
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  get_pageurl:function(){
     var that = this
     wx.getStorage({
       key: 'page_id',
-      success: function(pid) {
+      success: function (pid) {
         wx.getStorage({
           key: 'navigate_page',
-          success: function(page_url) {
+          success: function (page_url) {
             that.setData({
               url: app.url + page_url.data + '?account_id=' + pid.data
             })
           },
         })
-        
-        // console.log(app.url + page_url + res.data)
-      },
+      }
     })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var that = this
+    that.get_pageurl()
   },
 
   /**

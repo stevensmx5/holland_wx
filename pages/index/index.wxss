@@ -1,7 +1,6 @@
 /**index.wxss**/
-page:before{
-  background-color: #111113;
-}
+page,
+page:before,
 .page_bg image{
   background-color: #111113;
 }

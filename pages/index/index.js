@@ -8,7 +8,8 @@ Page({
     loading: false,
     plain: false,
     buplic_url: app.url,
-    bg_url:'images/home_background.jpg'
+    bg_url: 'images/home_background.jpg',
+    win_h: ''
   },
   get_val:function(e){
     search_val= e.detail.value
@@ -56,7 +57,8 @@ Page({
       })
     }
   },
-  onLoad: function () {
+  index_info:function(){
+    util.check_login()
     var that = this
     wx.request({
       url: app.url + 'sub/webservice/pageinfo.php',
@@ -68,14 +70,36 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        // console.log(res.data.Accounts)
-        // console.log(res.data.Thirdparty)
         that.setData({
           img_data: res.data.Accounts,
-          thirdparty_data:res.data.Thirdparty
+          thirdparty_data: res.data.Thirdparty
+        })
+      },
+      fail: function () {
+        wx.showModal({
+          title: '数据加载失败',
+          content: '请检查您的网络，重新加载吧',
+          showCancel: false,
+          confirmText:'重新加载',
+          success: function (res) {
+            if (res.confirm) {
+              that.index_info()
+            } else if (res.cancel){
+              that.index_info()
+            }
+          }
         })
       }
     })
+  },
+  onLoad: function () {
+    wx.showLoading({
+      title: '加载中，请稍候',
+      mask:true
+    })
+    var that = this
+    that.index_info()
+    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -105,10 +129,17 @@ Page({
     
   },
   onShow: function () {
+    var winH = wx.getSystemInfoSync().windowHeight + 'px'
+    this.setData({
+      win_h: winH
+    })
     // wx.setTabBarItem({
     //   index: 1,
     //   text: '景点'
     // })
+  },
+  onReady:function(){
+    wx.hideLoading()
   },
   getUserInfo: function(e) {
     //console.log(e)

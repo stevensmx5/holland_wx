@@ -57,15 +57,8 @@ Page({
       url: '../scenic/scenic'
     })
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    var that=this
-    var winH = wx.getSystemInfoSync().windowHeight + 'px'
-    this.setData({
-      win_h: winH
-    })
+  sceniclist_info: function () {
+    var that = this
     wx.getStorage({
       key: 'index_search',
       success: function (search_key) {
@@ -79,13 +72,27 @@ Page({
           header: {
             'content-type': 'application/x-www-form-urlencoded'
           },
-          success:function(res){
+          success: function (res) {
             that.setData({
-              Search_Val:res.data,
-              Num:res.data.length,
+              Search_Val: res.data,
+              Num: res.data.length,
               input_text: search_key.data
             })
-            // console.log(res.data)
+          },
+          fail: function () {
+            wx.showModal({
+              title: '数据加载失败',
+              content: '请检查您的网络，重新加载吧',
+              showCancel: false,
+              confirmText: '重新加载',
+              success: function (res) {
+                if (res.confirm) {
+                  that.sceniclist_info()
+                } else if (res.cancel) {
+                  that.sceniclist_info()
+                }
+              }
+            })
           }
         })
       },
@@ -96,13 +103,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
+    wx.showLoading({
+      title: '加载中，请稍候',
+      mask: true
+    })
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var that = this
+    var winH = wx.getSystemInfoSync().windowHeight + 'px'
+    this.setData({
+      win_h: winH
+    })
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    wx.hideLoading()
   
   },
 

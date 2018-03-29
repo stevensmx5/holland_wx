@@ -78,11 +78,68 @@ Page({
       url: '../scenic/scenic'
     })
   },
+  user_info: function () {
+    var that = this
+    wx.getStorage({
+      key: 'user_openid',
+      success: function (uid) {
+        wx.request({
+          url: app.url + 'sub/webservice/pageinfo.php',
+          data: {
+            Vcl_FunName: 'GetUserFavoriteList',
+            Vcl_OpenId: uid.data
+          },
+          method: "POST",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function (fav) {
+            wx.request({
+              url: app.url + 'sub/webservice/pageinfo.php',
+              data: {
+                Vcl_FunName: 'GetUserHistoryList',
+                Vcl_OpenId: uid.data
+              },
+              method: "POST",
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              success: function (res) {
+                that.setData({
+                  favorit_data: fav.data,
+                  history: res.data
+                })
+              }
+            })
+          },
+          fail: function () {
+            wx.showModal({
+              title: '数据加载失败',
+              content: '请检查您的网络，重新加载吧',
+              showCancel: false,
+              confirmText: '重新加载',
+              success: function (res) {
+                if (res.confirm) {
+                  that.user_info()
+                } else if (res.cancel) {
+                  that.user_info()
+                }
+              }
+            })
+          }
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
+    wx.showLoading({
+      title: '加载中，请稍候',
+      mask: true
+    })
   },
 
   getUserInfo: function (e) {
@@ -97,6 +154,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    wx.hideLoading()
   
   },
 
@@ -108,45 +166,7 @@ Page({
     this.setData({
       check: 0
     })
-    wx.getStorage({
-      key: 'user_openid',
-      success: function (uid) {
-        wx.request({
-          url: app.url + 'sub/webservice/pageinfo.php',
-          data: {
-            Vcl_FunName: 'GetUserFavoriteList',
-            Vcl_OpenId: uid.data
-          },
-          method: "POST",
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success: function (res) {
-            that.setData({
-              favorit_data: res.data
-            })
-          }
-        })
-
-        wx.request({
-          url: app.url + 'sub/webservice/pageinfo.php',
-          data: {
-            Vcl_FunName: 'GetUserHistoryList',
-            Vcl_OpenId: uid.data
-          },
-          method: "POST",
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success: function (res) {
-            that.setData({
-              history: res.data
-            })
-            console.log(res.data)
-          }
-        })
-      },
-    })
+    that.user_info()
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

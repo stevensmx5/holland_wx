@@ -96,60 +96,15 @@ Page({
       Hei: swiperH　　　　　　　　//设置高度
     })
   },
-  onLoad: function (options) {
-
-    if (options.id>0){
-      wx.setStorage({
-        key: 'page_id',
-        data: options.id,
-      })
-    }
-
-
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  onShow: function (options) {
-    var that = this
-
+  scenic_info: function () {
+    util.check_login()
+    var that=this
     wx.getStorage({
       key: 'page_id',
-      success: function (res) {
-        page_id = res.data
-      },
-    })
-
-    console.log(page_id)
-    wx.getStorage({
-      key: 'page_id',
-      complete: function(pid) {
+      complete: function (pid) {
         wx.getStorage({
           key: 'user_openid',
-          complete: function(uid) {
+          complete: function (uid) {
             wx.request({
               url: app.url + 'sub/webservice/pageinfo.php',
               data: {
@@ -196,7 +151,22 @@ Page({
                   Type: type,
                   fit: favorite,
                   SubProgram: sub_program,
-                  Thirdparty:thirdparty
+                  Thirdparty: thirdparty
+                })
+              },
+              fail: function () {
+                wx.showModal({
+                  title: '数据加载失败',
+                  content: '请检查您的网络，重新加载吧',
+                  showCancel: false,
+                  confirmText: '重新加载',
+                  success: function (res) {
+                    if (res.confirm) {
+                      that.scenic_info()
+                    } else if (res.cancel) {
+                      that.scenic_info()
+                    }
+                  }
                 })
               }
             })
@@ -210,19 +180,59 @@ Page({
               method: "POST",
               header: {
                 'content-type': 'application/x-www-form-urlencoded'
-              },
-              // success:function(res){
-              //   console.log(id.data)
-              // }
+              }
             })
           }
         })
-        
-      },
+      }
     })
-    
   },
-  onReady:function(){
+  onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中，请稍候',
+      mask: true
+    })
+    if (options.id>0){
+      wx.setStorage({
+        key: 'page_id',
+        data: options.id,
+      })
+    }
+
+
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
+  },
+  onShow: function () {
+    var that = this
+    that.scenic_info()
+  },
+  onReady: function () {
+    wx.hideLoading()
     this.videoContext=wx.createVideoContext('account_video')
   },
   guidance: function (event) {

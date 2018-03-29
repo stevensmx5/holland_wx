@@ -30,7 +30,7 @@
     ],
     "color":"#6b6b6b",
     "selectedColor":"#fff",
-    "backgroundColor":"#080808",
+    "backgroundColor":"#000",
     "borderStyle":"white"
   },
   "window": {
