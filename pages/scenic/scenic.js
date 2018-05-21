@@ -11,7 +11,8 @@ Page({
     plain: false,
     buplic_url: app.url,
     fit:0,
-    video_src:''
+    video_src:'',
+    share_id:''
   },
 
   
@@ -27,7 +28,7 @@ Page({
       // }
     })
   },
-  favorit:function(e){
+  favorit: function (e) {
     var that=this
     var a = e.target.id
     util.check_login()
@@ -87,6 +88,7 @@ Page({
       },
     })
   },
+  //图片高度自适应
   imgH: function (e) {
     var winWid = wx.getSystemInfoSync().windowWidth - 160;         //获取当前屏幕的宽度
     var imgh = e.detail.height;　　　　　　　　　　　　　　　　//图片高度
@@ -151,8 +153,10 @@ Page({
                   Type: type,
                   fit: favorite,
                   SubProgram: sub_program,
-                  Thirdparty: thirdparty
+                  Thirdparty: thirdparty,
+                  share_id: pid.data
                 })
+                wx.hideLoading()
               },
               fail: function () {
                 wx.showModal({
@@ -163,11 +167,20 @@ Page({
                   success: function (res) {
                     if (res.confirm) {
                       that.scenic_info()
+                      wx.showLoading({
+                        title: '加载中，请稍候',
+                        mask: true
+                      })
                     } else if (res.cancel) {
                       that.scenic_info()
+                      wx.showLoading({
+                        title: '加载中，请稍候',
+                        mask: true
+                      })
                     }
                   }
                 })
+                wx.hideLoading()
               }
             })
             wx.request({
@@ -187,6 +200,13 @@ Page({
       }
     })
   },
+  onShareAppMessage: function (res) {
+    return {
+      title: '探索荷兰',
+      path: '/pages/scenic/scenic?id=' + this.data.share_id,
+      imageUrl: ''
+    }
+  },
   onLoad: function (options) {
     wx.showLoading({
       title: '加载中，请稍候',
@@ -198,6 +218,73 @@ Page({
         data: options.id,
       })
     }
+    if (options.subid>0){
+      wx.setStorage({
+        key: 'thirdparty_id',
+        data: options.subid,
+      })
+    }
+    console.log(options.subid)
+
+    var that = this
+    wx.getStorage({
+      key: 'page_id',
+      complete: function (pid) {
+        wx.getStorage({
+          key: 'user_openid',
+          complete: function (uid) {
+            wx.request({
+              url: app.url + 'sub/webservice/pageinfo.php',
+              data: {
+                Vcl_FunName: 'GetAccountBaseInfo',
+                Vcl_Id: pid.data,
+                Vcl_OpenId: uid.data
+              },
+              method: "POST",
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              success: function (res) {
+                var sub_program = res.data.SubProgram
+                wx.getStorage({
+                  key: 'thirdparty_id',
+                  success: function (thi) {
+                    for (var i = 0; i < sub_program.length; i++) {
+                      var data = sub_program[i].Id;
+                      var url = sub_program[i].Link;
+                      if (thi.data == data) {
+                        wx.setStorage({
+                          key: 'navigate_page',
+                          data: url,
+                        })
+                        wx.navigateTo({
+                          url: '../guidance_web/guidance_web'
+                        })
+                        return;
+                      }
+                    }
+                    
+                  },
+                })
+              }
+            })
+            wx.request({
+              url: app.url + 'sub/webservice/pageinfo.php',
+              data: {
+                Vcl_FunName: 'UserHistoryAdd',
+                Vcl_AccountId: pid.data,
+                Vcl_OpenId: uid.data
+              },
+              method: "POST",
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              }
+            })
+          }
+        })
+      }
+    })
+
 
 
     if (app.globalData.userInfo) {
@@ -232,7 +319,6 @@ Page({
     that.scenic_info()
   },
   onReady: function () {
-    wx.hideLoading()
     this.videoContext=wx.createVideoContext('account_video')
   },
   guidance: function (event) {

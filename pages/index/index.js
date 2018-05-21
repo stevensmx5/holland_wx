@@ -74,6 +74,7 @@ Page({
           img_data: res.data.Accounts,
           thirdparty_data: res.data.Thirdparty
         })
+        wx.hideLoading()
       },
       fail: function () {
         wx.showModal({
@@ -84,13 +85,29 @@ Page({
           success: function (res) {
             if (res.confirm) {
               that.index_info()
+              wx.showLoading({
+                title: '加载中，请稍候',
+                mask: true
+              })
             } else if (res.cancel){
               that.index_info()
+              wx.showLoading({
+                title: '加载中，请稍候',
+                mask: true
+              })
             }
           }
         })
+        wx.hideLoading()
       }
     })
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: '探索荷兰',
+      path: '/pages/index/index',
+      imageUrl:''
+    }
   },
   onLoad: function () {
     wx.showLoading({
@@ -139,7 +156,6 @@ Page({
     // })
   },
   onReady:function(){
-    wx.hideLoading()
   },
   getUserInfo: function(e) {
     //console.log(e)

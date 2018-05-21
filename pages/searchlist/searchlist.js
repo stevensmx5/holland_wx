@@ -78,6 +78,7 @@ Page({
               Num: res.data.length,
               input_text: search_key.data
             })
+            wx.hideLoading()
           },
           fail: function () {
             wx.showModal({
@@ -88,11 +89,20 @@ Page({
               success: function (res) {
                 if (res.confirm) {
                   that.sceniclist_info()
+                  wx.showLoading({
+                    title: '加载中，请稍候',
+                    mask: true
+                  })
                 } else if (res.cancel) {
                   that.sceniclist_info()
+                  wx.showLoading({
+                    title: '加载中，请稍候',
+                    mask: true
+                  })
                 }
               }
             })
+            wx.hideLoading()
           }
         })
       },
@@ -125,7 +135,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    wx.hideLoading()
   
   },
 
