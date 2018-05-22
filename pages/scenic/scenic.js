@@ -224,7 +224,7 @@ Page({
         data: options.subid,
       })
     }
-    console.log(options.subid)
+    //console.log(options.subid)
 
     var that = this
     wx.getStorage({
@@ -317,6 +317,11 @@ Page({
   onShow: function () {
     var that = this
     that.scenic_info()
+
+    var winH = wx.getSystemInfoSync().windowHeight + 'px'
+    this.setData({
+      win_h: winH
+    })
   },
   onReady: function () {
     this.videoContext=wx.createVideoContext('account_video')

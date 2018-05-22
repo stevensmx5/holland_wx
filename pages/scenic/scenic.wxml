@@ -1,8 +1,8 @@
-<view class='container'>
+<view class='container' style='min-height:{{win_h}}'>
   <view class='secnic_bg'>
     <image src='{{BackgroundImage}}' mode="widthFix"></image>
   </view>
-  <view class='scenic_content'>
+  <view class='scenic_content' style='min-height:{{winHei}}'>
     <view class='scenic_type_box'>
       <view class='scenic_type'>{{Type}}</view>
       <image id='{{fit}}' src="{{fit == 0 ? '../../images/star.png':'../../images/star_checked.png'}}" bindtap='favorit'></image>

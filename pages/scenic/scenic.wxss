@@ -20,7 +20,7 @@ image{
   z-index: 500;
   box-sizing: border-box;
   padding: 0px 25px;
-  margin-top: 90%;
+  margin-top: 75%;
 }
 .scenic_content .scenic_type_box{
   width: 100%;
