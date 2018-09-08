@@ -19,14 +19,15 @@ image{
   width: 100%;
   z-index: 500;
   box-sizing: border-box;
-  padding: 0px 25px;
-  margin-top: 75%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 .scenic_content .scenic_type_box{
   width: 100%;
   float: left;
   box-sizing: border-box;
-  padding: 0px 5px;
+  padding: 0px 30px;
 }
 .scenic_content .scenic_type_box .scenic_type{
   float: left;
@@ -49,6 +50,15 @@ image{
   float: left;
   color: #fff;
 }
+.scenic_content .scenic_type_box .content_text{
+  width: 100%;
+  height: 56px;
+  float: left;
+  font-size: 10px;
+  line-height: 14px;
+  color: #fff;
+  margin: 20px 0px;
+}
 .scenic_content .scenic_type_box .name_ch{
   font-size: 26px;
   line-height: 28px;
@@ -61,18 +71,17 @@ image{
 .scenic_content .quick_toolbar_box{
   width: 100%;
   display: flex;
+  justify-content: flex-end;
   float: left;
   flex-wrap: wrap;
-  margin-top: 30px;
-  box-sizing: border-box;
-  padding: 0px 5px;
+  margin-top: 15px;
 }
 .scenic_content .quick_toolbar_box .quick_toolbar{
   width: 33.33%;
   box-sizing: border-box;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
-.scenic_content .quick_toolbar_box .quick_toolbar:nth-child(3n+1){
+/* .scenic_content .quick_toolbar_box .quick_toolbar:nth-child(3n+1){
   padding-right: 20px;
 }
 .scenic_content .quick_toolbar_box .quick_toolbar:nth-child(3n+2){
@@ -80,7 +89,7 @@ image{
 }
 .scenic_content .quick_toolbar_box .quick_toolbar:nth-child(3n){
   padding-left: 20px;
-}
+} */
 .scenic_content .quick_toolbar_box .quick_toolbar .quick_toolbar_btn{
   width: 100%;
   font-size: 12px;
@@ -88,19 +97,25 @@ image{
   background-color: transparent;
   line-height: 30px;
   border-radius: 15px;
-  border: 1px solid #fff;
+  border: 0;
+  text-align: center;
 }
 .scenic_content .recommend_scenic_box{
   width: 100%;
   float: left;
-  padding: 10px 0px 25px 0px;
   white-space:nowrap;
+  border-bottom: 1px solid rgba(255,255,255,0.27);
+  border-top: 1px solid rgba(255,255,255,0.27);
 }
 .scenic_content .recommend_scenic_box .recommend_scenic{
   width: 33.33%;
-  box-sizing: border-box;
-  padding: 0px 5px;
   display: inline-block;
+  box-sizing: border-box;
+  border-left: 1px solid rgba(255,255,255,0.27);
+  font-size: 0;
+}
+.scenic_content .recommend_scenic_box .recommend_scenic:first-child{
+  border-left: 0px;
 }
 .scenic_content .recommend_scenic_box .recommend_scenic_img{
   width: 100%;
@@ -111,13 +126,12 @@ image{
   border-radius: 5px;
 }
 .scenic_content .recommend_scenic_box .recommend_scenic_icon{
-  width: 30px;
-  height: 30px;
-  position: absolute;
+  width: 40px;
+  height: 40px;
   z-index: 50;
-  top: 50%;
-  left: 50%;
-  transform: translate(-15px,-15px);
+  margin-left: 50%;
+  transform: translateX(-20px);
+  margin-top: 15px;
 }
 .scenic_content .recommend_scenic_box .recommend_scenic_text{
   width: 100%;
@@ -126,6 +140,7 @@ image{
   color: #fff;
   text-align: center;
   line-height: 16px;
+  margin-bottom: 10px;
 }
 
 .video_box{

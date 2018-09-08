@@ -20,33 +20,6 @@ Page({
     })
     // console.log(search_val)
   },
-  search:function(){
-    var that = this
-    wx.getStorage({
-      key: 'index_search',
-      success: function (search_key) {
-        wx.request({
-          url: app.url + 'sub/webservice/pageinfo.php',
-          data: {
-            Vcl_FunName: 'GetSearchResult',
-            Vcl_Key: search_key.data
-          },
-          method: "POST",
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success: function (res) {
-            that.setData({
-              Search_Val: res.data,
-              Num: res.data.length,
-              input_text: search_key.data
-            })
-            // console.log(res.data)
-          }
-        })
-      },
-    })
-  },
   scenic_page: function (e) {
     var id = e.target.id
     wx.setStorage({
@@ -62,6 +35,7 @@ Page({
     wx.getStorage({
       key: 'index_search',
       success: function (search_key) {
+        //console.log(search_key.data)
         wx.request({
           url: app.url + 'sub/webservice/pageinfo.php',
           data: {
@@ -124,6 +98,7 @@ Page({
    */
   onShow: function () {
     var that = this
+    that.sceniclist_info()
     var winH = wx.getSystemInfoSync().windowHeight + 'px'
     this.setData({
       win_h: winH

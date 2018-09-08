@@ -119,9 +119,10 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded'
               },
               success: function (res) {
-                // console.log(res.data)
+                console.log(res.data)
                 var name = decodeURIComponent(res.data.Name)
                 var enname = decodeURIComponent(res.data.EnName)
+                var description = decodeURIComponent(res.data.Discription)
                 var bg_img = res.data.BackgroundImage
                 var type = decodeURIComponent(res.data.Type)
                 var favorite = res.data.Favorite
@@ -135,7 +136,7 @@ Page({
                   var data = thirdparty[i].Name;
                   thirdparty[i].Name = decodeURIComponent(data)
                 }
-                // console.log(sub_program)
+                // console.log(description)
 
                 wx.setStorage({
                   key: 'page_id',
@@ -149,6 +150,7 @@ Page({
                 that.setData({
                   ChName: name,
                   EnName: enname,
+                  Description: description,
                   BackgroundImage: app.url + res.data.BackgroundImage,
                   Type: type,
                   fit: favorite,
@@ -263,7 +265,6 @@ Page({
                         return;
                       }
                     }
-                    
                   },
                 })
               }
@@ -322,6 +323,11 @@ Page({
     this.setData({
       win_h: winH
     })
+
+    wx.removeStorage({
+      key: 'path_url',
+      success: function(res) {},
+    })
   },
   onReady: function () {
     this.videoContext=wx.createVideoContext('account_video')
@@ -337,6 +343,10 @@ Page({
       })
       wx.navigateTo({
         url: '../guidance_web/guidance_web'
+      })
+    } else if (btn_type == 1){
+      wx.navigateTo({
+        url: '../postcard/postcard'
       })
     } else if (btn_type == 2) {
       //console.log(app.url+url)

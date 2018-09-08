@@ -1,0 +1,39 @@
+<!--pages/postcardproduction/postcardproduction.wxml-->
+<view class='container' style='min-height:{{win_h}}'>
+  <view class='postcard_bg'>
+    <image src='{{BackgroundImage}}' mode="widthFix"></image>
+  </view>
+  <view class='postcard_content'>
+    <view class='postcard_box'>
+      <view class='name_ch'>{{ChName}}</view>
+      <view class='name_en'>{{EnName}}</view>
+      <view class='postcard_info'>
+        <view class='photo' style='height:{{photoH}}'>
+          <!--<canvas canvas-id='myCanvas'></canvas>-->
+          <image class='photo_img' src='{{Photo}}' style="width: {{width}}px;height: {{height}}px;"></image>
+        </view>
+        <view class='photo_text'>
+          <view class='date'>{{Date}}</view>
+          <view class='content_text'>{{Text}}</view>
+          <view class='postmark'>
+            <view class='text'>Netherlands</view>
+            <image src='../../images/fly.png' mode="widthFix"></image>
+          </view>
+          <view class='by_box'>
+            <view class='text'>by:{{By}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <button class='share_btn' open-type='share'>
+      <image src='../../images/share_icon.png' mode='widthFix'></image>
+      <view class='share_btn_text'>分享给朋友</view>
+    </button>
+  </view>
+  <view class='bottom_tabbar'>
+    <view class='btn' data-type='1' bindtap='tabbar'><image src='../../images/home.png' mode='widthFix'></image><view>首页</view></view>
+    <view class='btn' data-type='2' bindtap='tabbar'><image src='../../images/scenic_checked.png' mode='widthFix'></image><view class='active'>艾芙琳梦幻世界</view></view>
+    <view class='btn' data-type='3' bindtap='tabbar'><image src='../../images/user.png' mode='widthFix'></image><view>我的</view></view>
+  </view>
+</view>

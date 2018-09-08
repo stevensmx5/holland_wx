@@ -17,11 +17,16 @@ Page({
       key:'index_search',
       data: search_val
     })
-    // console.log(search_val)
+    //console.log(search_val)
   },
   search:function(){
     wx.navigateTo({
       url: '../searchlist/searchlist'
+    })
+  },
+  test:function(){
+    wx.navigateTo({
+      url: '../postcardproduction/postcardproduction?id=50&pageid=1'
     })
   },
   thirdparty:function(event){
@@ -51,11 +56,12 @@ Page({
       key: 'page_id',
       data: id
     })
-    if (id == 1) {
-      wx.switchTab({
-        url: '../scenic/scenic'
-      })
-    }
+
+    wx.switchTab({
+      url: '../scenic/scenic'
+    })
+    // if (id == 1) {
+    // }
   },
   index_info:function(){
     util.check_login()

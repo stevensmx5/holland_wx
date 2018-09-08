@@ -1,33 +1,33 @@
-// pages/guidance_web/guidance_web.js
-
 const app = getApp()
+var util = require('../../utils/util.js');
+
+// pages/imgtest/imgtest.js
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
-    
+  
   },
-  get_pageurl:function(){
-    var that = this
-    wx.getStorage({
-      key: 'page_id',
-      success: function (pid) {
-        wx.getStorage({
-          key: 'navigate_page',
-          success: function (page_url) {
-            that.setData({
-              url: app.url + page_url.data + '?account_id=' + pid.data
-            })
-          },
-        })
-      }
-    })
 
-    wx.removeStorage({
-      key: 'thirdparty_id',
+  //图片测试方法
+  imgtest: function () {
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
       success: function (res) {
-        
+        var imgurl = res.tempFilePaths;
+        wx.setStorage({
+          key: 'img_url',
+          data: imgurl,
+          success: function () {
+            wx.navigateTo({
+              url: '../imgtest/imgtest'
+            })
+          }
+        })
       },
     })
   },
@@ -36,7 +36,14 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    that.get_pageurl()
+    wx.getStorage({
+      key: 'img_url',
+      success: function(res) {
+        that.setData({
+          url:res.data
+        })
+      },
+    })
   },
 
   /**

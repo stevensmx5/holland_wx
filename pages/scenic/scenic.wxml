@@ -8,30 +8,34 @@
       <image id='{{fit}}' src="{{fit == 0 ? '../../images/star.png':'../../images/star_checked.png'}}" bindtap='favorit'></image>
       <view class='name_ch'>{{ChName}}</view>
       <view class='name_en'>{{EnName}}</view>
-    </view>
-    <view class='quick_toolbar_box'>
-      <block wx:for="{{Thirdparty}}">
-        <view class='quick_toolbar'>
-          <button class='quick_toolbar_btn'data-appid='{{item.Appid}}' data-page='{{item.Page}}'  bindtap='thirdparty'>{{item.Name}}</button>
-        </view>
-      </block>
-      
+      <scroll-view scroll-y='true' class='content_text'>{{Description}}</scroll-view>
     </view>
 
-    <view class='video_box'>
+
+    <!-- <view class='video_box'>
       <video id='account_video' class='video' mode='widthFix' src='{{video_src}}' bindfullscreenchange='screen_change'></video>
-    </view>
+    </view> -->
 
     <scroll-view scroll-x='true' class='recommend_scenic_box'>
       <block wx:for="{{SubProgram}}">
         <view class='recommend_scenic'>
           <view class='recommend_scenic_img'id='{{item.Id}}'  data-link='{{item.Link}}' data-type='{{item.Type}}' bindtap='guidance'>
-            <image class='recommend_scenic_bg' mode='widthFix' src='{{buplic_url}}{{item.LogoImage}}'></image>
+            <!-- <image class='recommend_scenic_bg' mode='widthFix' src='{{buplic_url}}{{item.LogoImage}}'></image> -->
             <image class='recommend_scenic_icon' src='{{buplic_url}}{{item.LogoIcon}}'></image>
+            <view class='recommend_scenic_text'>{{item.Name}}</view>
           </view>
-          <view class='recommend_scenic_text'>{{item.Name}}</view>
         </view>
       </block>
     </scroll-view>
+
+    
+    <view class='quick_toolbar_box'>
+      <block wx:for="{{Thirdparty}}">
+        <view class='quick_toolbar'>
+          <view class='quick_toolbar_btn'data-appid='{{item.Appid}}' data-page='{{item.Page}}'  bindtap='thirdparty'>{{item.Name}}</view>
+        </view>
+      </block>
+      
+    </view>
   </view>
 </view>

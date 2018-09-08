@@ -5,7 +5,9 @@
     "pages/user/user",
     "pages/searchlist/searchlist",
     "pages/guidance/guidance",
-    "pages/guidance_web/guidance_web"
+    "pages/guidance_web/guidance_web",
+    "pages/postcard/postcard",
+    "pages/postcardproduction/postcardproduction"
   ],
   "tabBar": {
     "list": [

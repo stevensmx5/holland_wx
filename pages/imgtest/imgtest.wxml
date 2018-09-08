@@ -1,0 +1,2 @@
+<!--pages/imgtest/imgtest.wxml-->
+<image class='img' src='{{url}}'></image>
