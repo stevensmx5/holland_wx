@@ -8,7 +8,7 @@ Page({
   data: {
     
   },
-  get_pageurl:function(){
+  get_pageurl: function (key_id){
     var that = this
     wx.getStorage({
       key: 'page_id',
@@ -17,7 +17,7 @@ Page({
           key: 'navigate_page',
           success: function (page_url) {
             that.setData({
-              url: app.url + page_url.data + '?account_id=' + pid.data
+              url: app.url + page_url.data + '?account_id=' + pid.data + '&key=' + key_id
             })
           },
         })
@@ -36,7 +36,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    that.get_pageurl()
+    //console.log(options.key)
+    var key_id = options.key
+    that.get_pageurl(key_id)
   },
 
   /**

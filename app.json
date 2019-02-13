@@ -37,7 +37,7 @@
   },
   "window": {
     "navigationBarBackgroundColor": "#222428",
-    "navigationBarTextStyle": "#fff",
+    "navigationBarTextStyle": "white",
     "navigationBarTitleText": "探索荷兰",
     "backgroundColor": "#111113",
     "backgroundTextStyle": "light"

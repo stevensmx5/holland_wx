@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.1",
+	"libVersion": "2.6.0",
 	"appid": "wxf73636db650b89d4",
 	"projectname": "holland_wx",
 	"condition": {

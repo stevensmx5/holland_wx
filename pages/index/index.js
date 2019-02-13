@@ -60,6 +60,7 @@ Page({
     wx.switchTab({
       url: '../scenic/scenic'
     })
+    
     // if (id == 1) {
     // }
   },
