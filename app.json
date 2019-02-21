@@ -41,5 +41,8 @@
     "navigationBarTitleText": "探索荷兰",
     "backgroundColor": "#111113",
     "backgroundTextStyle": "light"
-  }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wxddf8176de07c7d9a"
+  ]
 }

@@ -24,6 +24,11 @@ Page({
       url: '../searchlist/searchlist'
     })
   },
+  canvastest: function () {
+    wx.navigateTo({
+      url: '../guidance/guidance'
+    })
+  },
   test:function(){
     wx.navigateTo({
       url: '../postcardproduction/postcardproduction?id=50&pageid=1'

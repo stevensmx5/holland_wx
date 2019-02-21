@@ -93,68 +93,79 @@ Page({
         showCancel: false,
         content: '请输入您的名字',
       })
-    }else{
-      wx.getStorage({
-        key: 'path_url',
-        success: function (nomore) {
-          wx.getStorage({
-            key: 'page_id',
-            success: function(pid) {
-              wx.getStorage({
-                key: 'user_openid',
-                success: function (uid) {
-                  wx.getStorage({
-                    key: 'torday_date',
-                    success: function (t_date) {
-                      wx.showLoading({
-                        title: '图片上传中，请稍候',
-                        mask:true
-                      })
-                      wx.uploadFile({
-                        url: app.url + 'sub/webservice/pageinfo.php',
-                        filePath: that.data.Img_Path[0],
-                        name: 'Photo',
-                        formData: {
-                          Vcl_FunName: 'UploadDataFor3',
-                          Vcl_OpenId: uid.data,
-                          Vcl_AccountId: pid.data,
-                          Vcl_Date: t_date.data,
-                          Vcl_Text: e.detail.value.content,
-                          Vcl_By: e.detail.value.username
-                        },
-                        success: function (res) {
-                          var p_id = res.data
-                          //console.log(p_id)
-                          wx.setStorage({
-                            key: 'postcard_id',
-                            data: p_id,
-                          })
-                          wx.navigateTo({
-                            url: '../postcardproduction/postcardproduction?id=' + p_id + '&pageid=' + pid.data
-                          })
-                          wx.hideLoading()
-                        },
-                        fail:function(){
+    } else {
+      wx.showModal({
+        title: '提示',
+        showCancel: true,
+        content: '请注意，每个景点只保留一张明信片，如果上传将覆盖之前的明信片，是否继续？',
+        success: function(reminder){
+          if (reminder.confirm){
+            wx.getStorage({
+              key: 'path_url',
+              success: function (nomore) {
+                wx.getStorage({
+                  key: 'page_id',
+                  success: function (pid) {
+                    wx.getStorage({
+                      key: 'user_openid',
+                      success: function (uid) {
+                        wx.getStorage({
+                          key: 'torday_date',
+                          success: function (t_date) {
+                            wx.showLoading({
+                              title: '图片上传中，请稍候',
+                              mask: true
+                            })
+                            wx.uploadFile({
+                              url: app.url + 'sub/webservice/pageinfo.php',
+                              filePath: that.data.Img_Path[0],
+                              name: 'Photo',
+                              formData: {
+                                Vcl_FunName: 'UploadDataFor3',
+                                Vcl_OpenId: uid.data,
+                                Vcl_AccountId: pid.data,
+                                Vcl_Date: t_date.data,
+                                Vcl_Text: e.detail.value.content,
+                                Vcl_By: e.detail.value.username
+                              },
+                              success: function (res) {
+                                var p_id = res.data
+                                //console.log(p_id)
+                                wx.setStorage({
+                                  key: 'postcard_id',
+                                  data: p_id,
+                                })
+                                wx.navigateTo({
+                                  url: '../postcardproduction/postcardproduction?id=' + p_id + '&pageid=' + pid.data
+                                })
+                                wx.hideLoading()
+                              },
+                              fail: function () {
 
-                        }
-                      })
-                    }
-                  })
-                  
-                },
-              })
-              
-            },
-          })
-        },
-        fail:function () {
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: '请选择照片',
-          })
+                              }
+                            })
+                          }
+                        })
+
+                      },
+                    })
+
+                  },
+                })
+              },
+              fail: function () {
+                wx.showModal({
+                  title: '提示',
+                  showCancel: false,
+                  content: '请选择照片',
+                })
+              }
+            })
+          }
+          
         }
       })
+      
     }
   },
   /**

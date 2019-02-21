@@ -63,7 +63,7 @@
         <button class='partner_btn'>其他小程序</button>
       </view>
       <view class='partner_div'>
-        <button class='partner_btn'>其他小程序</button>
+        <button class='partner_btn' bindtap='canvastest'>其他小程序</button>
       </view>
     </view>
   </view>

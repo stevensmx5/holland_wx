@@ -96,11 +96,10 @@ Page({
 
                 var p_w = (wx.getSystemInfoSync().windowWidth - 60) * 0.55;
                 var p_h = p_w * 1.17;
-
+                console.log(img)
                 wx.getImageInfo({
                   src: img,
                   success:function(imginfo){
-                    console.log(imginfo)
                     var str = imginfo.width / imginfo.height;//图片的宽高比
                     if (str > 1) {//横版图片
                       that.setData({
