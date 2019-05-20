@@ -48,11 +48,11 @@ page{
   width: 100%;
   float: left;
   box-sizing: border-box;
-  padding: 0px 60px;
+  padding: 0px 30px;
   position: relative;
 }
 .my_record_box .record_type{
-  width: 50%;
+  width: 33.33%;
   float: left;
   color: #fff;
   font-size: 14px;
@@ -72,10 +72,13 @@ page{
   transition: all .5s ease;
 }
 .my_record_box .left{
-  margin-left: 25%;
+  margin-left: 16.66%;
+}
+.my_record_box .mid{
+  margin-left: 49.99%;
 }
 .my_record_box .right{
-  margin-left: 75%;
+  margin-left: 83.32%;
 }
 .record_list,
 .record_list_dis{

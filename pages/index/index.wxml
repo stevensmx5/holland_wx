@@ -36,7 +36,7 @@
       </swiper>
     </view>
     
-
+<!--
     <view class='partner_text'>合作伙伴</view>
     <view class='partner_box'>
       <block wx:for="{{thirdparty_data}}">
@@ -66,6 +66,7 @@
         <button class='partner_btn' bindtap='canvastest'>其他小程序</button>
       </view>
     </view>
+    -->
   </view>
   
 </view>

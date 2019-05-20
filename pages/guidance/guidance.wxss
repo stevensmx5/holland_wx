@@ -2,7 +2,89 @@
 page{
   background-color: #fff;
 }
-.canvas_style{
+.postcard_bg{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.postcard_bg image{
   width: 100%;
   display: block;
+}
+
+.canvas_style{
+  width: 100%;
+  z-index: 1;
+}
+
+.share_btn{
+  width: 60px;
+  float: left;
+  border: none;
+  color: #fff;
+  background-color: transparent;
+  font-size: 16px;
+  line-height: 40px;
+  padding: 0;
+  border-radius: 0;
+  z-index: 100;
+}
+.share_l{
+  margin-top: 20px;
+  margin-bottom: 80px;
+  margin-left: 50%;
+  transform: translateX(-65px);
+}
+.share_r{
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(15px);
+}
+.share_btn image{
+  width: 30px;
+  float: left;
+  margin: 0 15px 8px 13px;
+}
+.share_btn .share_btn_text{
+  width: 100%;
+  float: left;
+  font-size: 10px;
+  color: #fff;
+  line-height: 20px;
+  text-align: center;
+}
+.bottom_tabbar{
+  width: 100%;
+  height: 60px;
+  float: left;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: #111113;
+  z-index: 600;
+  display: flex;
+  z-index: 100;
+}
+.bottom_tabbar .btn{
+  flex: 1;
+  text-align: center;
+  color: #fff;
+}
+.bottom_tabbar .btn image{
+  width: 30px;
+  margin-top: 5px;
+}
+.bottom_tabbar .btn view{
+  font-size: 10px;
+  color: #6b6b6b;
+  line-height: 16px;
+}
+.bottom_tabbar .btn .active{
+  color: #fff;
+}
+button::after{
+  border: none;
 }

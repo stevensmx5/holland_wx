@@ -1,3 +1,20 @@
 <view class='container' style='min-height:{{win_h}}'>
+  <view class='postcard_bg'>
+    <image src='{{BackgroundImage}}' mode="widthFix"></image>
+  </view>
   <canvas canvas-id='first' style='width:{{win_w}};min-height:{{win_h}};' class='canvas_style' binderror="canvasIdErrorCallback"></canvas>
+  
+    <button class='share_btn share_l' open-type='share'>
+      <image src='../../images/share_icon.png' mode='widthFix'></image>
+      <view class='share_btn_text'>分享给朋友</view>
+    </button>
+    <view class='share_btn share_r' bindtap='savePostCard'>
+      <image src='../../images/share_icon.png' mode='widthFix'></image>
+      <view class='share_btn_text'>保存明信片</view>
+    </view>
+  <view class='bottom_tabbar'>
+    <view class='btn' data-type='1' bindtap='tabbar'><image src='../../images/home.png' mode='widthFix'></image><view>首页</view></view>
+    <view class='btn' data-type='2' bindtap='tabbar'><image src='../../images/scenic_checked.png' mode='widthFix'></image><view class='active'>艾芙琳梦幻世界</view></view>
+    <view class='btn' data-type='3' bindtap='tabbar'><image src='../../images/user.png' mode='widthFix'></image><view>我的</view></view>
+  </view>
 </view>

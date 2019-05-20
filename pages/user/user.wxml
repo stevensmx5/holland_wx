@@ -21,14 +21,15 @@
     </view>
   </view> -->
   <view class='my_record_box'>
-    <view class="record_type {{check==0?'active':''}}" bindtap='recordtype'>我的收藏</view>
-    <view class="record_type {{check==1?'active':''}}" bindtap='recordtype'>浏览记录</view>
-    <view class="bottom_line {{check==0?'left':'right'}}"></view>
+    <view class="record_type {{check==0?'active':''}}" data-check='0' bindtap='recordtype'>我的收藏</view>
+    <view class="record_type {{check==1?'active':''}}" data-check='1' bindtap='recordtype'>浏览记录</view>
+    <view class="record_type {{check==2?'active':''}}" data-check='2' bindtap='recordtype'>明信片</view>
+    <view class="bottom_line {{check==0?'left':''}}{{check==1?'mid':''}}{{check==2?'right':''}}"></view>
   </view>
   <scroll-view scroll-x='true' class='record_list'>
     <block wx:for='{{favorit_data}}'>
       <view class='record_list_img'>
-        <image id='{{item.Id}}' src='{{buplic_url}}{{item.Icon}}' mode='widthFix' bindtap='scenic_page'></image>
+        <image id='{{item.Id}}' data-pid='{{item.PostId}}' src='{{buplic_url}}{{item.Icon}}' mode='widthFix' bindtap='scenic_page'></image>
       </view>
     </block>
   </scroll-view>

@@ -33,7 +33,6 @@ Page({
   onLoad: function (options) {
     var that = this
     //console.log(options.pageid)
-    console.log(options.id)
     var account_id = options.pageid
     var postcardId = options.id
 
@@ -66,7 +65,7 @@ Page({
             // console.log(res.data)
             var name = decodeURIComponent(res.data.Name)
             var enname = decodeURIComponent(res.data.EnName)
-            var bg_img = res.data.BackgroundImage
+            var bg_img = res.data.Background3Image
 
 
             wx.setStorage({
@@ -76,7 +75,7 @@ Page({
             that.setData({
               ChName: name,
               EnName: enname,
-              BackgroundImage: app.url + res.data.BackgroundImage,
+              BackgroundImage: app.url + res.data.Background3Image,
             })
             wx.request({
               url: app.url + 'sub/webservice/pageinfo.php',
@@ -96,7 +95,6 @@ Page({
 
                 var p_w = (wx.getSystemInfoSync().windowWidth - 60) * 0.55;
                 var p_h = p_w * 1.17;
-                console.log(img)
                 wx.getImageInfo({
                   src: img,
                   success:function(imginfo){

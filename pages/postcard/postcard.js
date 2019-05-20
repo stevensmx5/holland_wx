@@ -237,10 +237,11 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded'
               },
               success: function (res) {
-                // console.log(res.data)
                 var name = decodeURIComponent(res.data.Name)
                 var enname = decodeURIComponent(res.data.EnName)
                 var bg_img = res.data.BackgroundImage
+                var postcard_bg = res.data.Background3Image
+                console.log(postcard_bg)
 
                 wx.setStorage({
                   key: 'page_id',
@@ -249,7 +250,7 @@ Page({
                 that.setData({
                   ChName: name,
                   EnName: enname,
-                  BackgroundImage: app.url + res.data.BackgroundImage,
+                  BackgroundImage: app.url + res.data.Background3Image,
                 })
                 wx.hideLoading()
               },

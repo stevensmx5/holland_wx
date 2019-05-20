@@ -7,14 +7,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-    check:0,
+    check: '',
     buplic_url: app.url,
   },
-  recordtype: function () {
-    var n = this.data.check;
+  recordtype: function (event) {
+    var n = event.currentTarget.dataset.check
     var that = this
-    //console.log(n)
     if (n == 0) {
+      this.setData({
+        check: 0
+      })
+      wx.getStorage({
+        key: 'user_openid',
+        success: function (uid) {
+          wx.request({
+            url: app.url + 'sub/webservice/pageinfo.php',
+            data: {
+              Vcl_FunName: 'GetUserFavoriteList',
+              Vcl_OpenId: uid.data
+            },
+            method: "POST",
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            success: function (res) {
+              that.setData({
+                favorit_data: res.data
+              })
+            }
+          })
+
+        }
+      })
+    } else if(n == 1){
       this.setData({
         check: 1
       })
@@ -42,7 +67,7 @@ Page({
       })
     } else {
       this.setData({
-        check: 0
+        check: 2
       })
       wx.getStorage({
         key: 'user_openid',
@@ -50,7 +75,7 @@ Page({
           wx.request({
             url: app.url + 'sub/webservice/pageinfo.php',
             data: {
-              Vcl_FunName: 'GetUserFavoriteList',
+              Vcl_FunName: 'GetUserFunction3List',
               Vcl_OpenId: uid.data
             },
             method: "POST",
@@ -70,13 +95,21 @@ Page({
   },
   scenic_page: function (e) {
     var id = e.target.id
+    var num = this.data.check
     wx.setStorage({
       key: 'page_id',
       data: id
     })
-    wx.switchTab({
-      url: '../scenic/scenic'
-    })
+    if (num==2){
+      var card_id = e.currentTarget.dataset.pid
+      wx.navigateTo({
+        url: '../postcardproduction/postcardproduction?id=' + card_id + '&pageid=' + id
+      })
+    }else{
+      wx.switchTab({
+        url: '../scenic/scenic'
+      })
+    }
   },
   user_info: function () {
     var that = this
@@ -150,6 +183,7 @@ Page({
       title: '加载中，请稍候',
       mask: true
     })
+    
   },
 
   getUserInfo: function (e) {

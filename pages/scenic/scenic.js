@@ -119,7 +119,7 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded'
               },
               success: function (res) {
-                console.log(res.data)
+                //console.log(res.data)
                 var name = decodeURIComponent(res.data.Name)
                 var enname = decodeURIComponent(res.data.EnName)
                 var description = decodeURIComponent(res.data.Discription)
