@@ -35,13 +35,13 @@ page{
   margin-top: 20px;
   margin-bottom: 80px;
   margin-left: 50%;
-  transform: translateX(-65px);
+  transform: translateX(-85px);
 }
 .share_r{
   position: absolute;
   bottom: 80px;
   left: 50%;
-  transform: translateX(15px);
+  transform: translateX(35px);
 }
 .share_btn image{
   width: 30px;

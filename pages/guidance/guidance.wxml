@@ -9,12 +9,12 @@
       <view class='share_btn_text'>分享给朋友</view>
     </button>
     <view class='share_btn share_r' bindtap='savePostCard'>
-      <image src='../../images/share_icon.png' mode='widthFix'></image>
+      <image src='../../images/save.png' mode='widthFix'></image>
       <view class='share_btn_text'>保存明信片</view>
     </view>
   <view class='bottom_tabbar'>
     <view class='btn' data-type='1' bindtap='tabbar'><image src='../../images/home.png' mode='widthFix'></image><view>首页</view></view>
-    <view class='btn' data-type='2' bindtap='tabbar'><image src='../../images/scenic_checked.png' mode='widthFix'></image><view class='active'>艾芙琳梦幻世界</view></view>
+    <view class='btn' data-type='2' bindtap='tabbar'><image src='../../images/scenic_checked.png' mode='widthFix'></image><view class='active'>{{ChName}}</view></view>
     <view class='btn' data-type='3' bindtap='tabbar'><image src='../../images/user.png' mode='widthFix'></image><view>我的</view></view>
   </view>
 </view>

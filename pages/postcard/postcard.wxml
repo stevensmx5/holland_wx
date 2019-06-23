@@ -32,6 +32,13 @@
       <button class='postcard_btn' form-type='submit'>提交</button>
     </view>
   </form>
+  <view class="alert_box {{show==0?'hid':''}}">
+    <view class='alert_div'>
+      <image src='../../images/gift_icon.png' mode='widthFix'></image>
+      <view class='alert_text'>{{mes}}</view>
+      <view class='alert_btn' bindtap='giftpage'>赢取好礼</view>
+    </view>
+  </view>
   <view class='bottom_tabbar'>
     <view class='btn' data-type='1' bindtap='tabbar'><image src='../../images/home.png' mode='widthFix'></image><view>首页</view></view>
     <view class='btn' data-type='2' bindtap='tabbar'><image src='../../images/scenic_checked.png' mode='widthFix'></image><view class='active'>{{ChName}}</view></view>

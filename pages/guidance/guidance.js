@@ -1,5 +1,6 @@
 // pages/guidance/guidance.js
 const app = getApp()
+var util = require('../../utils/util.js')
 var win_W=''
 var win_H=''
 Page({
@@ -10,6 +11,23 @@ Page({
   
   data: {
     win_h:'',
+  },
+  tabbar: function (event) {
+    var btn_type = event.currentTarget.dataset.type
+    // console.log(btn_type)
+    if (btn_type == 1) {
+      wx.switchTab({
+        url: '../../pages/index/index'
+      })
+    } else if (btn_type == 2) {
+      wx.switchTab({
+        url: '../../pages/scenic/scenic'
+      })
+    } else if (btn_type == 3) {
+      wx.switchTab({
+        url: '../../pages/user/user'
+      })
+    }
   },
   savePostCard:function(){
     var temp_url=''
@@ -28,8 +46,12 @@ Page({
         wx.saveImageToPhotosAlbum({
           filePath: temp_url,
         })
+        wx.showToast({
+          title: '您已成功收藏',
+          icon: 'none'
+        })
       }
-    },this)
+    }, this)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -37,7 +59,7 @@ Page({
   onLoad: function (options) {
     var that = this
     //console.log(options.pageid)
-    console.log(options.id)
+    //console.log(options.id)
     var account_id = options.pageid
     var postcardId = options.id
 
@@ -66,7 +88,7 @@ Page({
     var kgb = win_W / win_H
     var winW = win_W + 'px'
     var winH = win_H + "px"
-    var bg_img_w, bg_img_h
+    var bg_img_w, bg_img_h, img_url
 
     wx.setStorage({
       key: 'page_id',
@@ -99,10 +121,10 @@ Page({
             'content-type': 'application/x-www-form-urlencoded'
           },
           success: function (res) {
-            // console.log(res.data)
             var name = decodeURIComponent(res.data.Name)
             var enname = decodeURIComponent(res.data.EnName)
             var bg_img = res.data.BackgroundImage
+            // console.log(app.url + bg_img)
 
 
             wx.setStorage({
@@ -112,7 +134,7 @@ Page({
             that.setData({
               ChName: name,
               EnName: enname,
-              BackgroundImage: app.url + res.data.BackgroundImage,
+              BackgroundImage: app.url + bg_img,
               win_h: winH,
               win_w: winW,
             })
@@ -134,9 +156,9 @@ Page({
 
 
                 wx.downloadFile({
-                  url: bg_img,
+                  url: app.url + bg_img,
                   success: function (bg) {
-                    img_url = bg.tempFilePath
+                    var img_url = bg.tempFilePath
                     wx.getImageInfo({
                       src: img_url,
                       success: function (bginfo) {
@@ -145,7 +167,7 @@ Page({
                         wx.downloadFile({
                           url: img,
                           success: function (res) {
-                            img_src = res.tempFilePath
+                            var img_src = res.tempFilePath
                             wx.getImageInfo({
                               src: img_src,
                               success: function (imginfo) {
@@ -157,7 +179,8 @@ Page({
                                   image_h = imginfo.height
                                   photo_dx = (imginfo.width - image_w) / 2
                                   photo_dy = 0
-
+                                  console.log(image_w)
+                                  console.log(image_h)
                                 } else {//竖版图片
                                   photo_img_w = photo_w
                                   photo_img_h = (photo_w / imginfo.width) * imginfo.height
@@ -165,6 +188,8 @@ Page({
                                   image_h = imginfo.width * 1.17
                                   photo_dx = 0
                                   photo_dy = (imginfo.height - image_h) / 2
+                                  console.log(image_w)
+                                  console.log(image_h)
                                 }
 
 
@@ -206,17 +231,17 @@ Page({
                                 ctx.fillText('Netherlands', photo_w + 55, initY + 48 + drawtext_w * 0.3, drawtext_w)
                                 ctx.setTextAlign('center')
                                 ctx.fillText(post_date, drawtext_x, postcardbox_H + 45, drawtext_w)
-                                ctx.fillText('by:' + post_by, drawtext_x, postcardbox_H + 45 + photo_img_h - 20, drawtext_w)
-
+                                ctx.fillText('by:' + post_by, drawtext_x, postcardbox_H + 45 + photo_h - 20, drawtext_w)
+                                
                                 ctx.setFillStyle('#d9d9d9')
                                 ctx.fillRect(photo_w + 50, initY + 48 + drawtext_w * 0.3 + 7, drawtext_w, 1)
-                                ctx.fillRect(photo_w + 50, postcardbox_H + 45 + photo_img_h - 13, drawtext_w, 1)
+                                ctx.fillRect(photo_w + 50, postcardbox_H + 45 + photo_h - 13, drawtext_w, 1)
 
 
                                 ctx.setTextAlign('left')
                                 ctx.setFillStyle('#593d3d')
                                 for (let i = 0; i < post_text.length; i++) {
-                                  lineWidth += ctx.measureText(text[i]).width
+                                  lineWidth += ctx.measureText(post_text[i]).width
                                   if (lineWidth > drawtext_w) {
                                     ctx.fillText(post_text.substring(lastSubStrIndex, i), photo_w + 50, initY, drawtext_w)
                                     initY += 16
