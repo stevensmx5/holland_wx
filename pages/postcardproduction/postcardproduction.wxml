@@ -13,10 +13,10 @@
       <view class='share_btn_text'>保存至相册</view>
     </view>
 
-  <view class='alert_box'>
+  <view class="alert_box {{show==0?'hid':''}}">
     <view class='alert_div'>
-      <view class='alert_text'>您已成功打卡2景点，获得精选荷兰大礼包一个！</view>
-      <view class='sign_in_box'>
+      <view class='alert_text'>{{mes}}</view>
+      <view class="sign_in_box {{sign_in==0?'hid':''}}">
         <image src='../../images/sign_in_icon.png' mode='widthFix'></image>
         <view class='input_box'>
           <input type='text' name='username' bindinput='getInput' data-model="name" placeholder='名字'placeholder-style='color: #593d3d;'></input>
@@ -25,14 +25,16 @@
           <input type='text' name='address'bindinput='getInput' data-model="address" placeholder='地址'placeholder-style='color: #593d3d;'></input>
         </view>
         <view class='input_box yzm_box'>
-          <input type='text' name='phonenum'bindinput='getInput' data-model="phone" placeholder='手机'placeholder-style='color: #593d3d;'></input>
+          <input type='number' name='phonenum'bindinput='getInput' data-model="phone" placeholder='手机'placeholder-style='color: #593d3d;'></input>
           <view class="yam_btn {{send_mes==0?'':'resend'}}" bindtap='send_yzm'>{{send_text}}</view>
         </view>
         <view class='input_box'>
-          <input type='text' name='yzm'bindinput='getInput' data-model="yzm" placeholder='发送入验证码'placeholder-style='color: #593d3d;'></input>
+          <input type='number' name='yzm'bindinput='getInput' data-model="yzm" placeholder='验证码'placeholder-style='color: #593d3d;'></input>
         </view>
+        <view class='alert_btn' bindtap='signIn'>提交</view>
+        <view class='close_btn' bindtap='closemes'>取消</view>
       </view>
-      <view class='alert_btn'>提交</view>
+      <view class="alert_btn {{sign_in==1?'hid':''}}" bindtap='closemes'>确定</view>
     </view>
   </view>
 

@@ -12,10 +12,11 @@ Page({
     var that = this
     wx.getStorage({
       key: 'page_id',
-      success: function (pid) {
+      complete: function (pid) {
         wx.getStorage({
           key: 'navigate_page',
-          success: function (page_url) {
+          complete: function (page_url) {
+            console.log(page_url.data)
             that.setData({
               url: app.url + page_url.data + '?account_id=' + pid.data + '&key=' + key_id
             })

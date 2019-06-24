@@ -36,6 +36,15 @@
       </swiper>
     </view>
     
+
+  <view class="alert_box {{show==0?'hid':''}}">
+    <view class='alert_bg' bindtap='close_alert'></view>
+    <view class='alert_div'>
+      <image src='../../images/gift_icon.png' mode='widthFix'></image>
+      <view class='alert_text'>{{mes}}</view>
+      <view class='alert_btn' bindtap='giftpage'>赢取好礼</view>
+    </view>
+  </view>
 <!--
     <view class='partner_text'>合作伙伴</view>
     <view class='partner_box'>

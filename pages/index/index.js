@@ -2,14 +2,17 @@
 //获取应用实例
 const app = getApp()
 var util = require('../../utils/util.js');
-var search_val='';
+var search_val = '';
+var jump_url = ''
 Page({
   data: {
     loading: false,
     plain: false,
     buplic_url: app.url,
     bg_url: 'images/home_background.jpg',
-    win_h: ''
+    win_h: '',
+    show: '',
+    mes: '',
   },
   get_val:function(e){
     search_val= e.detail.value
@@ -32,6 +35,21 @@ Page({
   test:function(){
     wx.navigateTo({
       url: '../postcardproduction/postcardproduction?id=50&pageid=1'
+    })
+  }, 
+  giftpage: function () {
+    wx.setStorage({
+      key: 'navigate_page',
+      data: jump_url,
+    })
+    wx.navigateTo({
+      url: '../guidance_web/guidance_web'
+    })
+  },
+  close_alert:function(){
+    var that = this
+    that.setData({
+      show: 0
     })
   },
   thirdparty:function(event){
@@ -158,14 +176,62 @@ Page({
     
   },
   onShow: function () {
+    var that = this
+    var timestamp = Date.parse(new Date());
+    timestamp = timestamp / 1000;
+    var n = timestamp * 1000;
+    var date = new Date(n);
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
     var winH = wx.getSystemInfoSync().windowHeight + 'px'
     this.setData({
       win_h: winH
     })
-    // wx.setTabBarItem({
-    //   index: 1,
-    //   text: '景点'
-    // })
+
+    wx.request({
+      url: app.url + 'sub/webservice/pageinfo.php',
+      data: {
+        Vcl_FunName: 'GetEventMsg',
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (mes) {
+        wx.getStorage({
+          key: 'time_stamp',
+          complete: function (time) {
+            if (time.data == D) {
+              that.setData({
+                show: 0
+              })
+            }else{
+              if (mes.data.Msg == '') {
+                that.setData({
+                  show: 0
+                })
+              } else {
+                wx.setStorage({
+                  key: 'time_stamp',
+                  data: D,
+                })
+                that.setData({
+                  show: 1
+                })
+                jump_url = mes.data.Link
+
+                console.log(jump_url)
+              }
+            }
+          }
+        })
+        
+        that.setData({
+          mes: mes.data.Msg
+        })
+      }
+    })
+    
+   
   },
   onReady:function(){
   },

@@ -1,6 +1,5 @@
 const app = getApp()
 var util = require('../../utils/util.js')
-var jump_url=''
 // pages/postcard/postcard.js
 Page({
 
@@ -8,7 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    show:'',
   },
   photoupload:function(){
     var that=this
@@ -53,15 +51,6 @@ Page({
           }
         })
       }
-    })
-  },
-  giftpage:function(){
-    wx.setStorage({
-      key: 'navigate_page',
-      data: jump_url,
-    })
-    wx.navigateTo({
-      url: '../guidance_web/guidance_web'
     })
   },
   tabbar: function (event){
@@ -262,73 +251,7 @@ Page({
                 })
                 wx.hideLoading()
                 
-                wx.getStorage({
-                  key: 'time_stamp',
-                  success: function (time) {
-                    console.log(time.data)
-                    if(time.data == D){
-                      that.setData({
-                        show: 0
-                      })
-                    } else{
-                      wx.request({
-                        url: app.url + 'sub/webservice/pageinfo.php',
-                        data: {
-                          Vcl_FunName: 'GetEventMsg',
-                        },
-                        method: "POST",
-                        header: {
-                          'content-type': 'application/x-www-form-urlencoded'
-                        },
-                        success: function (mes) {
-                          if (mes.data.Msg == '') {
-                            that.setData({
-                              show: 0
-                            })
-                          } else {
-                            wx.setStorage({
-                              key: 'time_stamp',
-                              data: D,
-                            })
-                            that.setData({
-                              show: 1
-                            })
-                            jump_url = mes.data.Link
-                          }
-                        }
-                      })
-                    }
-                  },
-                  fail:function(){
-                    wx.request({
-                      url: app.url + 'sub/webservice/pageinfo.php',
-                      data: {
-                        Vcl_FunName: 'GetEventMsg',
-                      },
-                      method: "POST",
-                      header: {
-                        'content-type': 'application/x-www-form-urlencoded'
-                      },
-                      success: function (mes) {
-                        if (mes.data.Msg == '') {
-                          that.setData({
-                            show: 0
-                          })
-                        } else {
-                          wx.setStorage({
-                            key: 'time_stamp',
-                            data: D,
-                          })
-                          that.setData({
-                            show: 1,
-                            mes: mes.data.Msg
-                          })
-                          jump_url = mes.data.Link
-                        }
-                      }
-                    })
-                  }
-                })
+                
               },
               fail: function () {
                 wx.showModal({
