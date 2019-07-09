@@ -19,8 +19,7 @@ page:before,
   float: right;
 }
 .location_logo .location_box .location_icon{
-  width: 22px;
-  height: 22px;
+  width: 100px;
   float: left;
 }
 .location_logo .location_box .location_text{

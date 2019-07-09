@@ -38,4 +38,14 @@
       
     </view>
   </view>
+
+  <view class="alert_box {{show==0?'hid':''}}">
+    <view class='alert_div'>
+      <view class='alert_text'>为保证您能参与打卡集礼活动并给您寄送礼品，请授权您的公开信息。</view>
+      
+      <view class='close_btn' bindtap='closemes'>暂不授权</view>
+      
+      <button open-type="getUserInfo" bindgetuserinfo='getUser' bindtap='closemes' class='alert_btn'>立即授权</button>
+    </view>
+  </view>
 </view>

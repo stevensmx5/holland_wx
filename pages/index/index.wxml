@@ -5,10 +5,9 @@
   </view>
   <view class='page_content'>
     <view class='location_logo'>
-      <!-- <view class='location_box'>
-        <image class='location_icon' src='../../images/location.png'></image>
-        <text class='location_text'>location</text>
-      </view> -->
+      <view class='location_box'>
+        <image class='location_icon' src='../../images/gift.png' mode='widthFix' bindtap='giftpage'></image>
+      </view> 
       <view class='logo_box'>
         <image class='logo_icon' src='../../images/holland_logo.png' mode='widthFix'></image>
       </view>
@@ -26,7 +25,7 @@
 
     <view class='top_img_box'>
       <swiper class='img_box' indicator-dots='true' autoplay='true' interval='3000' circular='true' previous-margin='80px' next-margin='80px' style='height:{{Hei}}'>
-        <block wx:for="{{img_data}}" >
+        <block wx:for='{{img_data}}' >
           <swiper-item>
             <view class='top_img' bindtap='scenic_page'>
               <image id='{{item.Id}}' src='{{buplic_url}}{{item.Logo}}'mode="widthFix" bindload='imgH'></image>

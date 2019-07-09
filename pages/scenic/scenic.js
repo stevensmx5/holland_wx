@@ -12,7 +12,8 @@ Page({
     buplic_url: app.url,
     fit:0,
     video_src:'',
-    share_id:''
+    share_id: '',
+    show: '0',
   },
 
   
@@ -331,11 +332,18 @@ Page({
   },
   onReady: function () {
     this.videoContext=wx.createVideoContext('account_video')
+  }, 
+  closemes: function () {
+    var that = this
+    that.setData({
+      show: 0
+    })
   },
   guidance: function (event) {
+    var that = this
     var btn_type = event.currentTarget.dataset.type
     var url = event.currentTarget.dataset.link
-    // console.log(id)
+    // console.log(btn_type)
     if (btn_type == 0) {
       wx.setStorage({
         key: 'navigate_page',
@@ -345,8 +353,18 @@ Page({
         url: '../guidance_web/guidance_web'
       })
     } else if (btn_type == 1){
-      wx.navigateTo({
-        url: '../postcard/postcard'
+      wx.getSetting({
+        success (gs){
+          if (!gs.authSetting['scope.userInfo']) {
+            that.setData({
+              show:1
+            })
+          }else{
+            wx.navigateTo({
+              url: '../postcard/postcard'
+            })
+          }
+        }
       })
     } else if (btn_type == 2) {
       //console.log(app.url+url)

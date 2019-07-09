@@ -217,11 +217,11 @@ Page({
                 that.setData({
                   show: 1
                 })
-                jump_url = mes.data.Link
-
-                console.log(jump_url)
               }
             }
+
+            jump_url = mes.data.Link
+
           }
         })
         

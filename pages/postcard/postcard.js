@@ -53,6 +53,15 @@ Page({
       }
     })
   },
+  thirdparty: function (event) {
+    var id = event.currentTarget.dataset.appid
+    var page = event.currentTarget.dataset.page
+    wx.navigateToMiniProgram({
+      appId: 'wxddf8176de07c7d9a',
+      path: 'pages/start/start',
+      envVersion: 'release',
+    })
+  },
   tabbar: function (event){
     var btn_type = event.currentTarget.dataset.type
     // console.log(btn_type)

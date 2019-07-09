@@ -1,6 +1,6 @@
 /* pages/postcard/postcard.wxss */
 .container{
-  padding-bottom: 70px;
+  padding-bottom: 60px;
 }
 .postcard_bg{
   width: 100%;
@@ -159,6 +159,15 @@
   padding:3px 0 3px 5px;
   font-size: 12px;
   line-height: 14px;
+}
+.third{
+  margin-top: 20px;
+}
+.third,
+.third image{
+  width: 100%;
+  float: left;
+  z-index: 2;
 }
 .postcard_btn{
   width: 50%;

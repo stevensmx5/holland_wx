@@ -186,27 +186,83 @@ Page({
   },
   savePostCard: function () {
     var temp_url = ''
-    wx.canvasToTempFilePath({
-      x: 0,
-      y: 0,
-      width: win_W,
-      height: win_H,
-      destWidth: 750,
-      destHeight: 1000,
-      canvasId: 'first',
-      fileType: 'jpg',
-      quality: 1,
-      success: function (res) {
-        temp_url = res.tempFilePath
-        wx.saveImageToPhotosAlbum({
-          filePath: temp_url,
-        })
-        wx.showToast({
-          title: '您已成功保存',
-          icon: 'none'
-        })
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.writePhotosAlbum']) {
+          console.log(res.authSetting)
+          wx.showModal({
+            title: '提醒',
+            content: '保存明信片需要授权访问您的相册。',
+            cancelText:'暂不授权',
+            confirmText:'前往授权',
+            success:function(res){
+              if (res.confirm) {
+                wx.openSetting({
+                  success: function (data) {
+                    wx.canvasToTempFilePath({
+                      x: 0,
+                      y: 0,
+                      width: win_W,
+                      height: win_H,
+                      destWidth: 750,
+                      destHeight: 1000,
+                      canvasId: 'first',
+                      fileType: 'jpg',
+                      quality: 1,
+                      success: function (res) {
+                        temp_url = res.tempFilePath
+                        wx.saveImageToPhotosAlbum({
+                          filePath: temp_url,
+                        })
+                        wx.showToast({
+                          title: '您已成功保存',
+                          icon: 'none'
+                        })
+                      }
+                    }, this)
+                  },
+                  fail: function (data) {
+                    wx.showToast({
+                      title: '取消授权，保存失败',
+                      icon: 'none'
+                    })
+                  }
+                })
+              } else if (res.cancel) {
+                wx.showToast({
+                  title: '取消授权，保存失败',
+                  icon: 'none'
+                })
+              }
+            }
+          })
+          
+        } else {
+          wx.canvasToTempFilePath({
+            x: 0,
+            y: 0,
+            width: win_W,
+            height: win_H,
+            destWidth: 750,
+            destHeight: 1000,
+            canvasId: 'first',
+            fileType: 'jpg',
+            quality: 1,
+            success: function (res) {
+              temp_url = res.tempFilePath
+              wx.saveImageToPhotosAlbum({
+                filePath: temp_url,
+              })
+              wx.showToast({
+                title: '您已成功保存',
+                icon: 'none'
+              })
+            }
+          }, this)
+        }
       }
-    }, this)
+    })
+    
   },
   
   /**

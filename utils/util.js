@@ -58,10 +58,10 @@ function user_login(){
 }
 function check_login(){
   wx.checkSession({
-    sunccess:function(){
+    sunccess: function () {
       console.log(1)
     },
-    fail:function(){
+    fail: function () {
       wx.login({
         success: res => {
           wx.request({
@@ -105,6 +105,7 @@ function check_login(){
     }
   })
 }
+
 module.exports = {
   formatTime: formatTime,
   user_login: user_login,
