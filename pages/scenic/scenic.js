@@ -360,9 +360,56 @@ Page({
               show:1
             })
           }else{
-            wx.navigateTo({
-              url: '../postcard/postcard'
+            wx.login({
+              success: res => {
+                wx.request({
+                  url: 'https://www.hollandinfo.cn/xcx/sub/webservice/pageinfo.php',
+                  data: {
+                    Vcl_FunName: 'GetUserOpenId',
+                    Vcl_JsCode: res.code
+                  },
+                  method: "POST",
+                  header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                  },
+                  success: function (e) {
+                    wx.setStorage({
+                      key: 'user_openid',
+                      data: e.data.OpenId
+                    })
+                    wx.getUserInfo({
+                      success: function (i) {
+                        var userInfo = i.userInfo
+                        var nickName = userInfo.nickName
+                        var avatarUrl = userInfo.avatarUrl
+                        var gender = userInfo.gender
+                        wx.request({
+                          url: 'https://www.hollandinfo.cn/xcx/sub/webservice/pageinfo.php',
+                          data: {
+                            Vcl_FunName: 'UploadUserInfo',
+                            Vcl_OpenId: e.data.OpenId,
+                            Vcl_Photo: avatarUrl,
+                            Vcl_Nickname: nickName,
+                            Vcl_Sex: gender
+                          },
+                          method: "POST",
+                          header: {
+                            'content-type': 'application/x-www-form-urlencoded'
+                          },
+                          success:function(op){
+                            wx.navigateTo({
+                              url: '../postcard/postcard'
+                            })
+                          }
+                        })
+                      }
+                    })
+                    // console.log(e.data.OpenId)
+                  }
+                })
+              }
             })
+            
           }
         }
       })

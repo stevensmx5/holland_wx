@@ -9,6 +9,13 @@ Page({
   data: {
     check: '',
     buplic_url: app.url,
+    show: '0',
+  }, 
+  closemes: function () {
+    var that = this
+    that.setData({
+      show: 0
+    })
   },
   recordtype: function (event) {
     var n = event.currentTarget.dataset.check
@@ -92,6 +99,19 @@ Page({
         }
       })
     }
+  },
+  getUser: function (res) {
+    var that=this
+    if (res.detail.userInfo) {
+      wx.getUserInfo({
+        success:function(i){
+          that.setData({
+            userInfo: i.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    } 
   },
   scenic_page: function (e) {
     var id = e.target.id
@@ -186,14 +206,6 @@ Page({
     
   },
 
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -236,6 +248,66 @@ Page({
         }
       })
     }
+
+    wx.getSetting({
+      success(gs) {
+        if (!gs.authSetting['scope.userInfo']) {
+          that.setData({
+            show: 1
+          })
+        } else {
+          wx.login({
+            success: res => {
+              wx.request({
+                url: 'https://www.hollandinfo.cn/xcx/sub/webservice/pageinfo.php',
+                data: {
+                  Vcl_FunName: 'GetUserOpenId',
+                  Vcl_JsCode: res.code
+                },
+                method: "POST",
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded'
+                },
+                success: function (e) {
+                  wx.setStorage({
+                    key: 'user_openid',
+                    data: e.data.OpenId
+                  })
+                  wx.getUserInfo({
+                    success: function (i) {
+                      
+                      var userInfo = i.userInfo
+                      var nickName = userInfo.nickName
+                      var avatarUrl = userInfo.avatarUrl
+                      var gender = userInfo.gender
+                      wx.request({
+                        url: 'https://www.hollandinfo.cn/xcx/sub/webservice/pageinfo.php',
+                        data: {
+                          Vcl_FunName: 'UploadUserInfo',
+                          Vcl_OpenId: e.data.OpenId,
+                          Vcl_Photo: avatarUrl,
+                          Vcl_Nickname: nickName,
+                          Vcl_Sex: gender
+                        },
+                        method: "POST",
+                        header: {
+                          'content-type': 'application/x-www-form-urlencoded'
+                        },
+                        success: function () {
+                          
+                        }
+                      })
+                    }
+                  })
+                  // console.log(e.data.OpenId)
+                }
+              })
+            }
+          })
+
+        }
+      }
+    })
   },
 
   /**

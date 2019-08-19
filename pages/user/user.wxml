@@ -33,4 +33,14 @@
       </view>
     </block>
   </scroll-view>
+
+  <view class="alert_box {{show==0?'hid':''}}">
+    <view class='alert_div'>
+      <view class='alert_text'>使用“我的个人中心”，需授权你的公开信息。</view>
+      
+      <view class='close_btn' bindtap='closemes'>暂不授权</view>
+      
+      <button open-type="getUserInfo" bindgetuserinfo='getUser' bindtap='closemes' class='alert_btn'>立即授权</button>
+    </view>
+  </view>
 </view>
